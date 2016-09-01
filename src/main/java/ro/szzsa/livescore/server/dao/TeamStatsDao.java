@@ -3,5 +3,5 @@ package ro.szzsa.livescore.server.dao;
 /**
  *
  */
-public interface GameDetailsDao {
+public interface TeamStatsDao {
 }

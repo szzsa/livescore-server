@@ -1,4 +1,4 @@
-package ro.szzsa.livescore.server;
+package ro.szzsa.livescore.server.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  *
  */
-@EnableWebMvc
 @Configuration
-@ComponentScan({"ro.szzsa.livescore.server"})
-public class SpringWebConfig extends WebMvcConfigurerAdapter {
+@EnableWebMvc
+@ComponentScan({"ro.szzsa.livescore.server.controller",
+                "ro.szzsa.livescore.server.service",
+                "ro.szzsa.livescore.server.dao"})
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 }

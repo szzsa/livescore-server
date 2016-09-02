@@ -3,7 +3,7 @@ package ro.szzsa.livescore.server.controller;
 /**
  *
  */
-public interface DeviceApiController {
+public interface DeviceApiV1Controller {
 
   String getGameDetails();
 

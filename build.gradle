@@ -5,7 +5,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath 'net.researchgate:gradle-release:2.4.0'
+    classpath 'net.researchgate:gradle-release:' + releasePluginVersion
   }
 }
 
@@ -28,13 +28,14 @@ repositories {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.0'
+  gradleVersion = gradleWrapperVersion
   distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
 dependencies {
-  compile group: 'ro.szzsa.livescore', name: 'livescore-device-api', version: deviceApiVersion
-  compile group: 'ro.szzsa.livescore', name: 'livescore-management-api', version: managementApiVersion
+  compile group: 'ro.szzsa.livescore', name: 'livescore-administration-api', version: livescoreAdministrationApiVersion
+  compile group: 'ro.szzsa.livescore', name: 'livescore-management-api', version: livescoreManagementApiVersion
+  compile group: 'ro.szzsa.livescore', name: 'livescore-device-api', version: livescoreDeviceApiVersion
   compile group: 'javax.servlet', name: 'javax.servlet-api', version: javaxServletApiVersion
   compile group: 'org.springframework', name: 'spring-webmvc', version: springFrameworkVersion
   compile group: 'org.springframework', name: 'spring-context-support', version: springFrameworkVersion

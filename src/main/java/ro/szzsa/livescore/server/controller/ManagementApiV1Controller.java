@@ -3,7 +3,7 @@ package ro.szzsa.livescore.server.controller;
 /**
  *
  */
-public interface ManagementApiController {
+public interface ManagementApiV1Controller {
 
   void updateStandings();
 

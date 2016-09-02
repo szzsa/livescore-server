@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ro.szzsa.livescore.api.device.protocol.DeviceApiEndpoints;
-import ro.szzsa.livescore.server.controller.DeviceApiController;
+import ro.szzsa.livescore.server.controller.DeviceApiV1Controller;
 
 /**
  *
  */
 @RestController
-@RequestMapping(DeviceApiEndpoints.DEVICE_API_ROOT_PATH)
-public class DeviceApiControllerImpl implements DeviceApiController {
+@RequestMapping(DeviceApiEndpoints.DEVICE_API_V1_ROOT_PATH)
+public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
 
   @PostMapping(value = DeviceApiEndpoints.GET_GAME_DETAILS_PATH,
       consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,

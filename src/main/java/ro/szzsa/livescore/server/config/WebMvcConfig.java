@@ -14,6 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan({"ro.szzsa.livescore.server.controller",
                 "ro.szzsa.livescore.server.service",
                 "ro.szzsa.livescore.server.dao"})
-@Import(SecurityConfiguration.class)
+@Import(SecurityConfig.class)
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 }

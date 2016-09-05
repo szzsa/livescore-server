@@ -13,7 +13,7 @@ import ro.szzsa.livescore.api.management.protocol.ManagementApiEndpoints;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     auth.inMemoryAuthentication().withUser("manager").password("123456").roles("MANAGEMENT");

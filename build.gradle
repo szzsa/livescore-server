@@ -44,6 +44,8 @@ dependencies {
   testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 
+war.archiveName "ROOT.war"
+
 def nexusUrl = project.hasProperty('nexusUrl') ? nexusUrl : ''
 def nexusUsername = project.hasProperty('nexusUsername') ? nexusUsername : ''
 def nexusPassword = project.hasProperty('nexusPassword') ? nexusPassword : ''

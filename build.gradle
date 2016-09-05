@@ -39,8 +39,9 @@ dependencies {
   compile group: 'javax.servlet', name: 'javax.servlet-api', version: javaxServletApiVersion
   compile group: 'org.springframework', name: 'spring-webmvc', version: springFrameworkVersion
   compile group: 'org.springframework', name: 'spring-context-support', version: springFrameworkVersion
-  compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: springSecurityVersion
-  compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: oauth2SecurityVersion
+  compile group: 'org.springframework.security', name: 'spring-security-config', version: springSecurityVersion
+  compile group: 'org.springframework.security', name: 'spring-security-web', version: springSecurityVersion
+  compile group: 'com.google.code.gson', name: 'gson', version: gsonVersion
   testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 

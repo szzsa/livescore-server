@@ -5,9 +5,9 @@ package ro.szzsa.livescore.server.controller;
  */
 public interface ManagementApiV1Controller {
 
-  void updateStandings();
+  void updateStandings(String standingsUpdateRequest);
 
-  void updateGames();
+  void updateGames(String gamesUpdateRequest);
 
-  void updateGameDetails();
+  void updateGameDetails(String gameDetailsUpdateRequest);
 }

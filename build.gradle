@@ -42,7 +42,13 @@ dependencies {
   compile group: 'org.springframework.security', name: 'spring-security-config', version: springSecurityVersion
   compile group: 'org.springframework.security', name: 'spring-security-web', version: springSecurityVersion
   compile group: 'com.google.code.gson', name: 'gson', version: gsonVersion
+  compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
+  compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: jclOverSlf4jVersion
   testCompile group: 'junit', name: 'junit', version: junitVersion
+}
+
+configurations.all {
+  exclude group: "commons-logging", module: "commons-logging"
 }
 
 war.archiveName "ROOT.war"

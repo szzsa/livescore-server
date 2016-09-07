@@ -11,9 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({"ro.szzsa.livescore.server.controller",
-                "ro.szzsa.livescore.server.service",
-                "ro.szzsa.livescore.server.dao"})
+@ComponentScan({
+  "ro.szzsa.livescore.server.controller",
+  "ro.szzsa.livescore.server.service",
+  "ro.szzsa.livescore.server.dao"})
 @Import(SecurityConfig.class)
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 }

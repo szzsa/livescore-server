@@ -1,8 +1,8 @@
 package ro.szzsa.livescore.server.config;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 import javax.servlet.ServletRegistration;
+
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  *

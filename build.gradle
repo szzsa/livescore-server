@@ -40,10 +40,12 @@ dependencies {
   compile group: 'javax.servlet', name: 'javax.servlet-api', version: javaxServletApiVersion
   compile group: 'org.springframework', name: 'spring-webmvc', version: springFrameworkVersion
   compile group: 'org.springframework', name: 'spring-context-support', version: springFrameworkVersion
+  compile group: 'org.springframework', name: 'spring-jdbc', version: springFrameworkVersion
   compile group: 'org.springframework.security', name: 'spring-security-config', version: springSecurityVersion
   compile group: 'org.springframework.security', name: 'spring-security-web', version: springSecurityVersion
   compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
   compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: jclOverSlf4jVersion
+  compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
   testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 

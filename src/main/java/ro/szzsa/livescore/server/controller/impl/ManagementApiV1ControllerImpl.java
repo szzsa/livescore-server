@@ -25,21 +25,21 @@ public class ManagementApiV1ControllerImpl implements ManagementApiV1Controller 
   private final Converter converter = Converters.createJsonConverter();
 
   @PostMapping(value = ManagementApiEndpoints.UPDATE_STANDINGS_PATH,
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void updateStandings(@RequestBody String standingsUpdateRequest) throws ConverterException {
     StandingsUpdateRequest request = converter.fromString(standingsUpdateRequest, StandingsUpdateRequest.class);
   }
 
   @PostMapping(value = ManagementApiEndpoints.UPDATE_GAMES_PATH,
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void updateGames(@RequestBody String gamesUpdateRequest) throws ConverterException {
     GamesUpdateRequest request = converter.fromString(gamesUpdateRequest, GamesUpdateRequest.class);
   }
 
   @PostMapping(value = ManagementApiEndpoints.UPDATE_GAME_DETAILS_PATH,
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void updateGameDetails(@RequestBody String gameDetailsUpdateRequest) throws ConverterException {
     GameDetailsUpdateRequest request = converter.fromString(gameDetailsUpdateRequest, GameDetailsUpdateRequest.class);

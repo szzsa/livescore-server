@@ -1,7 +1,5 @@
 package ro.szzsa.livescore.server.controller.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ro.szzsa.livescore.server.controller.ExceptionHandlingController;
 
 /**

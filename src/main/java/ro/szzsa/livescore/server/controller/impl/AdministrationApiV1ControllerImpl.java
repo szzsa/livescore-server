@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.szzsa.livescore.api.admin.protocol.AdministrationApiEndpoints;
 import ro.szzsa.livescore.server.controller.AdministrationApiV1Controller;
-import ro.szzsa.livescore.server.converter.Converter;
-import ro.szzsa.livescore.server.converter.Converters;
+import ro.szzsa.utils.converter.Converter;
+import ro.szzsa.utils.converter.Converters;
 
 /**
  *

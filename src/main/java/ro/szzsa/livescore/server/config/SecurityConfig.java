@@ -6,14 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 import ro.szzsa.livescore.api.admin.protocol.AdministrationApiEndpoints;
 import ro.szzsa.livescore.api.device.protocol.DeviceApiEndpoints;
@@ -39,15 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and().requiresChannel()
         .antMatchers(DeviceApiEndpoints.DEVICE_API_ROOT_PATH + "/**").requiresInsecure()
         .antMatchers(ManagementApiEndpoints.MANAGEMENT_API_ROOT_PATH + "/**").requiresSecure()
-        .antMatchers(AdministrationApiEndpoints.ADMINISTRATION_API_ROOT_PATH + "/**").requiresSecure();
-    http.exceptionHandling().authenticationEntryPoint(new BasicAuthenticationEntryPoint() {
-      @Override
-      public void commence(HttpServletRequest request,
-                           HttpServletResponse response,
-                           AuthenticationException authException)
-          throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-      }
-    });
+        .antMatchers(AdministrationApiEndpoints.ADMINISTRATION_API_ROOT_PATH + "/**").requiresSecure()
+        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 }

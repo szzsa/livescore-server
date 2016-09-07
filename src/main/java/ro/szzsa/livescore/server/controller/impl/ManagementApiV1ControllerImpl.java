@@ -11,8 +11,9 @@ import ro.szzsa.livescore.api.management.protocol.request.GameDetailsUpdateReque
 import ro.szzsa.livescore.api.management.protocol.request.GamesUpdateRequest;
 import ro.szzsa.livescore.api.management.protocol.request.StandingsUpdateRequest;
 import ro.szzsa.livescore.server.controller.ManagementApiV1Controller;
-import ro.szzsa.livescore.server.converter.Converter;
-import ro.szzsa.livescore.server.converter.Converters;
+import ro.szzsa.utils.converter.Converter;
+import ro.szzsa.utils.converter.ConverterException;
+import ro.szzsa.utils.converter.Converters;
 
 /**
  *
@@ -24,23 +25,23 @@ public class ManagementApiV1ControllerImpl implements ManagementApiV1Controller 
   private final Converter converter = Converters.createJsonConverter();
 
   @PostMapping(value = ManagementApiEndpoints.UPDATE_STANDINGS_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
-  public void updateStandings(@RequestBody String standingsUpdateRequest) {
+  public void updateStandings(@RequestBody String standingsUpdateRequest) throws ConverterException {
     StandingsUpdateRequest request = converter.fromString(standingsUpdateRequest, StandingsUpdateRequest.class);
   }
 
   @PostMapping(value = ManagementApiEndpoints.UPDATE_GAMES_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
-  public void updateGames(@RequestBody String gamesUpdateRequest) {
+  public void updateGames(@RequestBody String gamesUpdateRequest) throws ConverterException {
     GamesUpdateRequest request = converter.fromString(gamesUpdateRequest, GamesUpdateRequest.class);
   }
 
   @PostMapping(value = ManagementApiEndpoints.UPDATE_GAME_DETAILS_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
-  public void updateGameDetails(@RequestBody String gameDetailsUpdateRequest) {
+  public void updateGameDetails(@RequestBody String gameDetailsUpdateRequest) throws ConverterException {
     GameDetailsUpdateRequest request = converter.fromString(gameDetailsUpdateRequest, GameDetailsUpdateRequest.class);
   }
 }

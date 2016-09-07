@@ -36,12 +36,12 @@ dependencies {
   compile group: 'ro.szzsa.livescore', name: 'livescore-administration-api', version: livescoreAdministrationApiVersion
   compile group: 'ro.szzsa.livescore', name: 'livescore-management-api', version: livescoreManagementApiVersion
   compile group: 'ro.szzsa.livescore', name: 'livescore-device-api', version: livescoreDeviceApiVersion
+  compile group: 'ro.szzsa.utils', name: 'converter', version: converterVersion
   compile group: 'javax.servlet', name: 'javax.servlet-api', version: javaxServletApiVersion
   compile group: 'org.springframework', name: 'spring-webmvc', version: springFrameworkVersion
   compile group: 'org.springframework', name: 'spring-context-support', version: springFrameworkVersion
   compile group: 'org.springframework.security', name: 'spring-security-config', version: springSecurityVersion
   compile group: 'org.springframework.security', name: 'spring-security-web', version: springSecurityVersion
-  compile group: 'com.google.code.gson', name: 'gson', version: gsonVersion
   compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
   compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: jclOverSlf4jVersion
   testCompile group: 'junit', name: 'junit', version: junitVersion

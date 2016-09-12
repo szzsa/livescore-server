@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.Penalty;
 /**
  *
  */
-public interface PenaltyDao extends JpaRepository<Penalty, Long> {
+public interface PenaltyDao extends JpaRepository<Penalty, Integer> {
 }

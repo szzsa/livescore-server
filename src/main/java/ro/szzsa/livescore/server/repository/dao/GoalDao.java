@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.Goal;
 /**
  *
  */
-public interface GoalDao extends JpaRepository<Goal, Long> {
+public interface GoalDao extends JpaRepository<Goal, Integer> {
 }

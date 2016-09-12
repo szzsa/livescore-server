@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.TeamStats;
 /**
  *
  */
-public interface TeamStatsDao extends JpaRepository<TeamStats, Long> {
+public interface TeamStatsDao extends JpaRepository<TeamStats, Integer> {
 }

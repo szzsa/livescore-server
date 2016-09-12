@@ -15,7 +15,6 @@ import ro.szzsa.livescore.api.device.protocol.request.VersionSyncRequest;
 import ro.szzsa.livescore.api.device.protocol.response.GameDetailsResponse;
 import ro.szzsa.livescore.api.device.protocol.response.StatsSyncResponse;
 import ro.szzsa.livescore.api.device.protocol.response.VersionSyncResponse;
-import ro.szzsa.livescore.model.Game;
 import ro.szzsa.livescore.server.controller.DeviceApiV1Controller;
 import ro.szzsa.livescore.server.service.GameDetailsService;
 import ro.szzsa.utils.converter.Converter;
@@ -46,7 +45,7 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   public String getGameDetails(@RequestBody String gameDetailsRequest) throws ConverterException {
     GameDetailsRequest request = converter.fromString(gameDetailsRequest, GameDetailsRequest.class);
     GameDetailsResponse response = new GameDetailsResponse();
-    response.setGame(new Game());
+    response.setGame(gameDetailsService.getGame(request.getGameId()));
     return converter.toString(response);
   }
 

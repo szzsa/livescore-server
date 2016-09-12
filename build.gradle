@@ -43,6 +43,7 @@ dependencies {
   compile group: 'org.springframework', name: 'spring-jdbc', version: springFrameworkVersion
   compile group: 'org.springframework.data', name: 'spring-data-jpa', version: springDataJpaVersion
   compile group: 'javax.persistence', name: 'persistence-api', version: persistenceApiVersion
+  compile group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
   compile group: 'org.springframework.security', name: 'spring-security-config', version: springSecurityVersion
   compile group: 'org.springframework.security', name: 'spring-security-web', version: springSecurityVersion
   compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion

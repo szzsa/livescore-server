@@ -19,7 +19,7 @@ import ro.szzsa.livescore.api.management.protocol.ManagementApiEndpoints;
 
 @Configuration
 @EnableWebSecurity
-@Import(AuthenticationProviderConfig.class)
+@Import(AuthProviderConfig.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private static final String MANAGEMENT_ROLE = "MANAGEMENT";
@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 
-  @Bean(name = "passwordEncoder")
+  @Bean
   public PasswordEncoder passwordencoder() {
     return new BCryptPasswordEncoder();
   }

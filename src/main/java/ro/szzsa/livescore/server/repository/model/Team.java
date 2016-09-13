@@ -72,6 +72,14 @@ public class Team {
     this.timeZone = timeZone;
   }
 
+  public IceRink getIceRink() {
+    return iceRink;
+  }
+
+  public void setIceRink(IceRink iceRink) {
+    this.iceRink = iceRink;
+  }
+
   public String getHomeColor() {
     return homeColor;
   }

@@ -1,7 +1,6 @@
 package ro.szzsa.livescore.server.repository.model;
 
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,6 +43,14 @@ public class Standings {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public Set<TeamStats> getStats() {
+    return stats;
+  }
+
+  public void setStats(Set<TeamStats> stats) {
+    this.stats = stats;
   }
 
   public boolean isGroup() {

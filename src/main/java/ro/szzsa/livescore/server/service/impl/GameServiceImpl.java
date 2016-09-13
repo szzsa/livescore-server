@@ -1,13 +1,12 @@
 package ro.szzsa.livescore.server.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ro.szzsa.livescore.model.Game;
 import ro.szzsa.livescore.model.GameStatus;
@@ -15,27 +14,38 @@ import ro.szzsa.livescore.model.Goal;
 import ro.szzsa.livescore.model.Penalty;
 import ro.szzsa.livescore.model.PenaltyType;
 import ro.szzsa.livescore.server.repository.dao.GameDao;
-import ro.szzsa.livescore.server.service.GameDetailsService;
+import ro.szzsa.livescore.server.service.GameService;
 
 /**
  *
  */
 @Service
-public class GameDetailsServiceImpl implements GameDetailsService {
+public class GameServiceImpl implements GameService {
 
-  private final GameDao gameDao;
+  private final GameDao dao;
 
   @Autowired
-  public GameDetailsServiceImpl(GameDao gameDao) {
-    this.gameDao = gameDao;
+  public GameServiceImpl(GameDao dao) {
+    this.dao = dao;
   }
 
   @Override
   public Game getGame(String id) {
-    return convert(gameDao.findOne(id));
+    return convertGame(dao.findOne(id));
   }
 
-  private Game convert(ro.szzsa.livescore.server.repository.model.Game entity) {
+  @Override
+  public List<Game> getGames() {
+    return convertGames(dao.findAll());
+  }
+
+  private List<Game> convertGames(Iterable<ro.szzsa.livescore.server.repository.model.Game> entities) {
+    List<Game> games = new ArrayList<>();
+    entities.forEach(game -> games.add(convertGame(game)));
+    return games;
+  }
+
+  private Game convertGame(ro.szzsa.livescore.server.repository.model.Game entity) {
     if (entity == null) {
       return null;
     }
@@ -56,7 +66,7 @@ public class GameDetailsServiceImpl implements GameDetailsService {
 
   private List<Goal> convertGoals(Set<ro.szzsa.livescore.server.repository.model.Goal> entities) {
     List<Goal> goals = new ArrayList<>(entities.size());
-    goals.addAll(entities.stream().map(this::convertGoal).collect(Collectors.toList()));
+    entities.forEach(goal -> goals.add(convertGoal(goal)));
     return goals;
   }
 
@@ -72,7 +82,7 @@ public class GameDetailsServiceImpl implements GameDetailsService {
 
   private List<Penalty> convertPenalties(Set<ro.szzsa.livescore.server.repository.model.Penalty> entities) {
     List<Penalty> penalties = new ArrayList<>(entities.size());
-    penalties.addAll(entities.stream().map(this::convertPenalty).collect(Collectors.toList()));
+    entities.forEach(penalty -> penalties.add(convertPenalty(penalty)));
     return penalties;
   }
 

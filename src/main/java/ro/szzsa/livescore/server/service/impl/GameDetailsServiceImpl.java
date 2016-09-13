@@ -1,15 +1,16 @@
 package ro.szzsa.livescore.server.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import ro.szzsa.livescore.model.Game;
+import ro.szzsa.livescore.model.GameStatus;
 import ro.szzsa.livescore.model.Goal;
 import ro.szzsa.livescore.model.Penalty;
 import ro.szzsa.livescore.model.PenaltyType;
@@ -31,14 +32,18 @@ public class GameDetailsServiceImpl implements GameDetailsService {
 
   @Override
   public Game getGame(String id) {
-    return convert(gameDao.getOne(id));
+    return convert(gameDao.findOne(id));
   }
 
   private Game convert(ro.szzsa.livescore.server.repository.model.Game entity) {
+    if (entity == null) {
+      return null;
+    }
+
     Game game = new Game();
     game.setId(entity.getId());
     game.setDate(entity.getDate());
-    game.setStatus(entity.getStatus());
+    game.setStatus(GameStatus.valueOf(entity.getStatus()));
     game.setTime(entity.getTime());
     game.setHomeTeamCode(entity.getHomeTeamCode());
     game.setVisitorTeamCode(entity.getVisitorTeamCode());

@@ -1,14 +1,12 @@
 package ro.szzsa.livescore.server.repository.model;
 
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import ro.szzsa.livescore.model.GameStatus;
 
 /**
  *
@@ -25,8 +23,7 @@ public class Game {
 
   private long date;
 
-  @Enumerated(EnumType.STRING)
-  private GameStatus status;
+  private String status;
 
   private int homeTeamScore;
 
@@ -34,10 +31,10 @@ public class Game {
 
   private String time;
 
-  @OneToMany(mappedBy = "gameId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "gameId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Goal> goals;
 
-  @OneToMany(mappedBy = "gameId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "gameId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Penalty> penalties;
 
   public String getId() {
@@ -72,11 +69,11 @@ public class Game {
     this.date = date;
   }
 
-  public GameStatus getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(GameStatus status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 

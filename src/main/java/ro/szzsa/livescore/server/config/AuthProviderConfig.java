@@ -22,7 +22,7 @@ public class AuthProviderConfig {
   private static final String AUTH_DATASOURCE_JNDI_NAME = "java:jboss/datasources/AuthDS";
 
   @Bean
-  public DataSource dataSource() {
+  public DataSource authDataSource() {
     JndiDataSourceLookup lookup = new JndiDataSourceLookup();
     return lookup.getDataSource(AUTH_DATASOURCE_JNDI_NAME);
   }
@@ -30,7 +30,7 @@ public class AuthProviderConfig {
   @Bean
   public UserDetailsService userDetailsService() {
     JdbcDaoImpl jdbcImpl = new JdbcDaoImpl();
-    jdbcImpl.setDataSource(dataSource());
+    jdbcImpl.setDataSource(authDataSource());
     jdbcImpl.setUsersByUsernameQuery(USERS_BY_USERNAME_QUERY);
     jdbcImpl.setAuthoritiesByUsernameQuery(AUTHORITIES_BY_USERNAME_QUERY);
     return jdbcImpl;

@@ -1,8 +1,10 @@
 package ro.szzsa.livescore.server.repository.model;
 
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -17,7 +19,7 @@ public class Standings {
 
   private String title;
 
-  @OneToMany(mappedBy = "standingsId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "standingsId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<TeamStats> stats;
 
   private boolean isGroup;

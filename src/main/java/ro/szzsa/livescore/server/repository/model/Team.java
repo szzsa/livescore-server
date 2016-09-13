@@ -2,6 +2,7 @@ package ro.szzsa.livescore.server.repository.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -22,7 +23,7 @@ public class Team {
 
   private String timeZone;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private IceRink iceRink;
 
   private String homeColor;

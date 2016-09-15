@@ -12,4 +12,8 @@ public interface GameService {
   Game getGame(String id);
 
   List<Game> getGames();
+
+  void updateGame(Game game);
+
+  void updateGames(List<Game> games);
 }

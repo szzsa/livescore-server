@@ -49,6 +49,7 @@ dependencies {
   compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
   compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: jclOverSlf4jVersion
   compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
+  compile group: 'org.apache.commons', name: 'commons-lang3', version: commonsLangVersion
   testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 

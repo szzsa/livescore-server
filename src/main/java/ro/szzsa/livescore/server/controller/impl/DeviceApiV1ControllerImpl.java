@@ -52,8 +52,8 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   }
 
   @PostMapping(value = DeviceApiEndpoints.GET_GAME_DETAILS_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public String getGameDetails(@RequestBody String gameDetailsRequest) throws ConverterException {
     GameDetailsRequest request = converter.fromString(gameDetailsRequest, GameDetailsRequest.class);
@@ -63,7 +63,7 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   }
 
   @PostMapping(value = DeviceApiEndpoints.GET_STATS_PATH,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public String getStats() throws ConverterException {
     StatsSyncResponse response = new StatsSyncResponse();
@@ -74,8 +74,8 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   }
 
   @PostMapping(value = DeviceApiEndpoints.SYNC_VERSION_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public String syncVersion(@RequestBody String versionSyncRequest) throws ConverterException {
     VersionSyncRequest request = converter.fromString(versionSyncRequest, VersionSyncRequest.class);

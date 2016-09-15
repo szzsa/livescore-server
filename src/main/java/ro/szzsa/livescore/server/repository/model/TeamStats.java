@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class TeamStats {
 
   @Id
-  private int id;
+  private String id;
 
   private String teamCode;
 
@@ -34,11 +34,11 @@ public class TeamStats {
 
   private int place;
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 

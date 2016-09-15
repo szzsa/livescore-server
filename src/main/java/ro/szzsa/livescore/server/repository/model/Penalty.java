@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Penalty {
 
   @Id
-  private int id;
+  private String id;
 
   private String types;
 
@@ -22,11 +22,11 @@ public class Penalty {
 
   private String time;
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 

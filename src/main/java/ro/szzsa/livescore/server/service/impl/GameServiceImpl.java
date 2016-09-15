@@ -2,9 +2,11 @@ package ro.szzsa.livescore.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ import ro.szzsa.livescore.server.service.GameService;
 @Service
 public class GameServiceImpl implements GameService {
 
+  private static final String SEPARATOR = ",";
+
   private final GameDao dao;
 
   @Autowired
@@ -37,6 +41,16 @@ public class GameServiceImpl implements GameService {
   @Override
   public List<Game> getGames() {
     return convertGames(dao.findAll());
+  }
+
+  @Override
+  public void updateGame(Game game) {
+    dao.save(convertGameToEntity(game));
+  }
+
+  @Override
+  public void updateGames(List<Game> games) {
+    games.forEach(this::updateGame);
   }
 
   private List<Game> convertGames(Iterable<ro.szzsa.livescore.server.repository.model.Game> entities) {
@@ -65,6 +79,10 @@ public class GameServiceImpl implements GameService {
   }
 
   private List<Goal> convertGoals(Set<ro.szzsa.livescore.server.repository.model.Goal> entities) {
+    if (entities == null) {
+      return null;
+    }
+
     List<Goal> goals = new ArrayList<>(entities.size());
     entities.forEach(goal -> goals.add(convertGoal(goal)));
     return goals;
@@ -73,7 +91,9 @@ public class GameServiceImpl implements GameService {
   private Goal convertGoal(ro.szzsa.livescore.server.repository.model.Goal entity) {
     Goal goal = new Goal();
     goal.setTime(entity.getTime());
-    goal.setAssists(Arrays.asList(entity.getAssists().split(",")));
+    if (StringUtils.isNotEmpty(entity.getAssists())) {
+      goal.setAssists(Arrays.asList(entity.getAssists().split(SEPARATOR)));
+    }
     goal.setAuthor(entity.getAuthor());
     goal.setGameId(entity.getGameId());
     goal.setTeamCode(entity.getTeamCode());
@@ -81,6 +101,10 @@ public class GameServiceImpl implements GameService {
   }
 
   private List<Penalty> convertPenalties(Set<ro.szzsa.livescore.server.repository.model.Penalty> entities) {
+    if (entities == null) {
+      return null;
+    }
+
     List<Penalty> penalties = new ArrayList<>(entities.size());
     entities.forEach(penalty -> penalties.add(convertPenalty(penalty)));
     return penalties;
@@ -98,9 +122,77 @@ public class GameServiceImpl implements GameService {
 
   private List<PenaltyType> convertPenaltyTypes(String entity) {
     List<PenaltyType> penaltyTypes = new ArrayList<>();
-    for (String penaltyType : entity.split(",")) {
+    for (String penaltyType : entity.split(SEPARATOR)) {
       penaltyTypes.add(PenaltyType.valueOf(penaltyType));
     }
     return penaltyTypes;
+  }
+
+  private ro.szzsa.livescore.server.repository.model.Game convertGameToEntity(Game game) {
+    ro.szzsa.livescore.server.repository.model.Game entity = new ro.szzsa.livescore.server.repository.model.Game();
+    if (dao.exists(game.getId())) {
+      entity = dao.findOne(game.getId());
+    }
+    entity.setId(game.getId());
+    entity.setDate(game.getDate());
+    entity.setStatus(game.getStatus().name());
+    entity.setTime(game.getTime());
+    entity.setHomeTeamCode(game.getHomeTeamCode());
+    entity.setVisitorTeamCode(game.getVisitorTeamCode());
+    entity.setHomeTeamScore(game.getHomeTeamScore());
+    entity.setVisitorTeamScore(game.getVisitorTeamScore());
+    entity.setGoals(convertGoalsToEntities(game.getGoals()));
+    entity.setPenalties(convertPenaltiesToEntities(game.getPenalties()));
+    return entity;
+  }
+
+  private Set<ro.szzsa.livescore.server.repository.model.Goal> convertGoalsToEntities(List<Goal> goals) {
+    if (goals == null) {
+      return null;
+    }
+
+    Set<ro.szzsa.livescore.server.repository.model.Goal> entities = new HashSet<>(goals.size());
+    goals.forEach(goal -> entities.add(convertGoalToEntity(goal)));
+    return entities;
+  }
+
+  private ro.szzsa.livescore.server.repository.model.Goal convertGoalToEntity(Goal goal) {
+    ro.szzsa.livescore.server.repository.model.Goal entity = new ro.szzsa.livescore.server.repository.model.Goal();
+    entity.setId(goal.getGameId() + "-" + goal.getTime());
+    entity.setTime(goal.getTime());
+    entity.setAssists(StringUtils.join(goal.getAssists(), SEPARATOR));
+    entity.setAuthor(goal.getAuthor());
+    entity.setGameId(goal.getGameId());
+    entity.setTeamCode(goal.getTeamCode());
+    return entity;
+  }
+
+  private Set<ro.szzsa.livescore.server.repository.model.Penalty> convertPenaltiesToEntities(List<Penalty> penalties) {
+    if (penalties == null) {
+      return null;
+    }
+
+    Set<ro.szzsa.livescore.server.repository.model.Penalty> entities = new HashSet<>(penalties.size());
+    penalties.forEach(penalty -> entities.add(convertPenaltyToEntity(penalty)));
+    return entities;
+  }
+
+  private ro.szzsa.livescore.server.repository.model.Penalty convertPenaltyToEntity(Penalty penalty) {
+    ro.szzsa.livescore.server.repository.model.Penalty entity = new ro.szzsa.livescore.server.repository.model.Penalty();
+    entity.setId(penalty.getGameId() + "-" + penalty.getTime());
+    entity.setTime(penalty.getTime());
+    entity.setPlayer(penalty.getPlayer());
+    entity.setTypes(convertPenaltyTypesToEntity(penalty.getTypes()));
+    entity.setGameId(penalty.getGameId());
+    entity.setTeamCode(penalty.getTeamCode());
+    return entity;
+  }
+
+  private String convertPenaltyTypesToEntity(List<PenaltyType> types) {
+    if (types == null) {
+      return null;
+    }
+
+    return StringUtils.join(types, SEPARATOR);
   }
 }

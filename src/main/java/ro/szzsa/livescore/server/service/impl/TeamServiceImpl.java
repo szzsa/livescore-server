@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ro.szzsa.livescore.model.IceRink;
 import ro.szzsa.livescore.model.Team;
 import ro.szzsa.livescore.server.repository.dao.TeamDao;
 import ro.szzsa.livescore.server.service.TeamService;
+import ro.szzsa.livescore.server.service.converter.TeamConverter;
 
 /**
  *
@@ -19,9 +19,13 @@ public class TeamServiceImpl implements TeamService {
 
   private final TeamDao dao;
 
+  private final TeamConverter converter;
+
   @Autowired
-  public TeamServiceImpl(TeamDao dao) {
+  public TeamServiceImpl(TeamDao dao,
+                         TeamConverter converter) {
     this.dao = dao;
+    this.converter = converter;
   }
 
   @Override
@@ -29,33 +33,21 @@ public class TeamServiceImpl implements TeamService {
     return convertTeams(dao.findAll());
   }
 
+  @Override
+  public void updateTeam(Team team) {
+    dao.save(converter.toEntity(team));
+  }
+
+  @Override
+  public void deleteTeam(Team team) {
+    if (dao.exists(team.getCode())) {
+      dao.delete(team.getCode());
+    }
+  }
+
   private List<Team> convertTeams(Iterable<ro.szzsa.livescore.server.repository.model.Team> entities) {
     List<Team> teams = new ArrayList<>();
-    entities.forEach(team -> teams.add(convertTeam(team)));
+    entities.forEach(team -> teams.add(converter.toModel(team)));
     return teams;
-  }
-
-  private Team convertTeam(ro.szzsa.livescore.server.repository.model.Team entity) {
-    Team team = new Team();
-    team.setCode(entity.getCode());
-    team.setName(entity.getName());
-    team.setCity(entity.getCity());
-    team.setCountry(entity.getCountry());
-    team.setYearFounded(entity.getYearFounded());
-    team.setTimeZone(entity.getTimeZone());
-    team.setIceRink(convertIceRink(entity.getIceRink()));
-    team.setHomeColor(entity.getName());
-    team.setAwayColor(entity.getName());
-    return team;
-  }
-
-  private IceRink convertIceRink(ro.szzsa.livescore.server.repository.model.IceRink entity) {
-    IceRink iceRink = new IceRink();
-    iceRink.setName(entity.getName());
-    iceRink.setAddress(entity.getAddress());
-    iceRink.setCapacity(entity.getCapacity());
-    iceRink.setLatitude(entity.getLatitude());
-    iceRink.setLongitude(entity.getLongitude());
-    return iceRink;
   }
 }

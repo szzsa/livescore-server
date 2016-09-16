@@ -10,4 +10,6 @@ import ro.szzsa.livescore.model.Standings;
 public interface StandingsService {
 
   List<Standings> getStandings();
+
+  void updateStandings(Standings standings);
 }

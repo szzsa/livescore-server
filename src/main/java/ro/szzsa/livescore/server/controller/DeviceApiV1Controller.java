@@ -1,15 +1,13 @@
 package ro.szzsa.livescore.server.controller;
 
-import ro.szzsa.utils.converter.ConverterException;
-
 /**
  *
  */
 public interface DeviceApiV1Controller {
 
-  String getGameDetails(String gameDetailsRequest) throws ConverterException;
+  String getGameDetails(String gameDetailsRequest);
 
-  String getStats() throws ConverterException;
+  String getStats();
 
-  String syncVersion(String versionSyncRequest) throws ConverterException;
+  String syncVersion(String versionSyncRequest);
 }

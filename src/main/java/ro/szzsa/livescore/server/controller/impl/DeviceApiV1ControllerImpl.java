@@ -19,7 +19,6 @@ import ro.szzsa.livescore.server.service.StandingsService;
 import ro.szzsa.livescore.server.service.TeamService;
 import ro.szzsa.livescore.server.service.VersionService;
 import ro.szzsa.utils.converter.Converter;
-import ro.szzsa.utils.converter.ConverterException;
 import ro.szzsa.utils.converter.Converters;
 
 /**
@@ -52,10 +51,10 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   }
 
   @PostMapping(value = DeviceApiEndpoints.GET_GAME_DETAILS_PATH,
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
-  public String getGameDetails(@RequestBody String gameDetailsRequest) throws ConverterException {
+  public String getGameDetails(@RequestBody String gameDetailsRequest) {
     GameDetailsRequest request = converter.fromString(gameDetailsRequest, GameDetailsRequest.class);
     GameDetailsResponse response = new GameDetailsResponse();
     response.setGame(gameService.getGame(request.getGameId()));
@@ -63,9 +62,9 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   }
 
   @PostMapping(value = DeviceApiEndpoints.GET_STATS_PATH,
-      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
-  public String getStats() throws ConverterException {
+  public String getStats() {
     StatsSyncResponse response = new StatsSyncResponse();
     response.setGames(gameService.getGames());
     response.setStandings(standingsService.getStandings());
@@ -74,10 +73,10 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   }
 
   @PostMapping(value = DeviceApiEndpoints.SYNC_VERSION_PATH,
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
-  public String syncVersion(@RequestBody String versionSyncRequest) throws ConverterException {
+  public String syncVersion(@RequestBody String versionSyncRequest) {
     VersionSyncRequest request = converter.fromString(versionSyncRequest, VersionSyncRequest.class);
     VersionSyncResponse response = new VersionSyncResponse();
     response.setUpdateApp(request.getAppVersion() < versionService.getVersion());

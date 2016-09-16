@@ -19,8 +19,8 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
  */
 @Configuration
 @EnableJpaRepositories(
-    basePackages = "ro.szzsa.livescore.server.repository.dao",
-    entityManagerFactoryRef = "entityManager"
+  basePackages = "ro.szzsa.livescore.server.repository.dao",
+  entityManagerFactoryRef = "entityManager"
 )
 public class PersistenceConfig {
 

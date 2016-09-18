@@ -35,11 +35,17 @@ public class TeamServiceImpl implements TeamService {
 
   @Override
   public void updateTeam(Team team) {
+    if (team == null) {
+      return;
+    }
     dao.save(converter.toEntity(team));
   }
 
   @Override
   public void deleteTeam(Team team) {
+    if (team == null) {
+      return;
+    }
     if (dao.exists(team.getCode())) {
       dao.delete(team.getCode());
     }

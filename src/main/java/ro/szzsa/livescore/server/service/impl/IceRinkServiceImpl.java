@@ -35,11 +35,17 @@ public class IceRinkServiceImpl implements IceRinkService {
 
   @Override
   public void updateIceRink(IceRink iceRink) {
+    if (iceRink == null) {
+      return;
+    }
     dao.save(converter.toEntity(iceRink));
   }
 
   @Override
   public void deleteIceRink(IceRink iceRink) {
+    if (iceRink == null) {
+      return;
+    }
     if (dao.exists(iceRink.getName())) {
       dao.delete(iceRink.getName());
     }

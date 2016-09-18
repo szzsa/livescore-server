@@ -40,11 +40,17 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public void updateGame(Game game) {
+    if (game == null) {
+      return;
+    }
     dao.save(converter.toEntity(game));
   }
 
   @Override
   public void updateGames(List<Game> games) {
+    if (games == null) {
+      return;
+    }
     games.forEach(this::updateGame);
   }
 

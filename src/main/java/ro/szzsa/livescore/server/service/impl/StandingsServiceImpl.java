@@ -35,6 +35,9 @@ public class StandingsServiceImpl implements StandingsService {
 
   @Override
   public void updateStandings(Standings standings) {
+    if (standings == null) {
+      return;
+    }
     dao.save(converter.toEntity(standings));
   }
 

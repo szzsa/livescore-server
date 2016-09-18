@@ -37,7 +37,7 @@ public class StandingsConverter implements DaoConverter<Standings, ro.szzsa.live
     Standings standings = new Standings();
     standings.setId(entity.getId());
     standings.setActive(entity.isActive());
-    standings.setGroup(entity.isGroup());
+    standings.setPlayoff(entity.isPlayoff());
     standings.setPlaces(entity.getPlaces());
     standings.setSeriesLimit(entity.getSeriesLimit());
     standings.setStats(convertEntitiesToStats(entity.getStats()));
@@ -53,7 +53,7 @@ public class StandingsConverter implements DaoConverter<Standings, ro.szzsa.live
       entity = dao.findOne(standings.getId());
     }
     entity.setActive(standings.isActive());
-    entity.setGroup(standings.isGroup());
+    entity.setPlayoff(standings.isPlayoff());
     entity.setPlaces(standings.getPlaces());
     entity.setSeriesLimit(standings.getSeriesLimit());
     entity.setStats(convertStatsToEntities(standings.getStats()));

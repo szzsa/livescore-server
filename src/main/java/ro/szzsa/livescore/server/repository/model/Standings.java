@@ -21,7 +21,7 @@ public class Standings {
   @OneToMany(mappedBy = "standingsId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<TeamStats> stats;
 
-  private boolean isGroup;
+  private boolean isPlayoff;
 
   private int seriesLimit;
 
@@ -53,12 +53,12 @@ public class Standings {
     this.stats = stats;
   }
 
-  public boolean isGroup() {
-    return isGroup;
+  public boolean isPlayoff() {
+    return isPlayoff;
   }
 
-  public void setGroup(boolean group) {
-    isGroup = group;
+  public void setPlayoff(boolean playoff) {
+    isPlayoff = playoff;
   }
 
   public int getSeriesLimit() {

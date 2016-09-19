@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 public class Standings {
 
   @Id
-  private int id;
+  private String id;
 
   private String title;
 
@@ -29,11 +29,11 @@ public class Standings {
 
   private String places;
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 

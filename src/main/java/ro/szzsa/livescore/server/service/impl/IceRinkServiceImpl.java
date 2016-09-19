@@ -46,8 +46,8 @@ public class IceRinkServiceImpl implements IceRinkService {
     if (iceRink == null) {
       return;
     }
-    if (dao.exists(iceRink.getName())) {
-      dao.delete(iceRink.getName());
+    if (dao.exists(iceRink.getId())) {
+      dao.delete(iceRink.getId());
     }
   }
 

@@ -34,7 +34,9 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
     goal.setTeamCode(entity.getTeamCode());
     goal.setTime(entity.getTime());
     goal.setAuthor(entity.getAuthor());
-    goal.setAssists(Arrays.asList(entity.getAssists().split(SEPARATOR)));
+    if (entity.getAssists() != null) {
+      goal.setAssists(Arrays.asList(entity.getAssists().split(SEPARATOR)));
+    }
     return goal;
   }
 
@@ -50,7 +52,9 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
     entity.setTeamCode(goal.getTeamCode());
     entity.setTime(goal.getTime());
     entity.setAuthor(goal.getAuthor());
-    entity.setAssists(StringUtils.join(goal.getAssists(), SEPARATOR));
+    if (goal.getAssists() != null) {
+      entity.setAssists(StringUtils.join(goal.getAssists(), SEPARATOR));
+    }
     return entity;
   }
 

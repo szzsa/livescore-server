@@ -10,6 +10,8 @@ import javax.persistence.Id;
 public class IceRink {
 
   @Id
+  private String id;
+
   private String name;
 
   private String address;
@@ -19,6 +21,14 @@ public class IceRink {
   private double longitude;
 
   private double latitude;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public String getName() {
     return name;

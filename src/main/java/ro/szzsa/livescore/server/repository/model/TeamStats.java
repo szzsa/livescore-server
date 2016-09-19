@@ -14,7 +14,7 @@ public class TeamStats {
 
   private String teamCode;
 
-  private int standingsId;
+  private String standingsId;
 
   private int points;
 
@@ -50,11 +50,11 @@ public class TeamStats {
     this.teamCode = teamCode;
   }
 
-  public int getStandingsId() {
+  public String getStandingsId() {
     return standingsId;
   }
 
-  public void setStandingsId(int standingsId) {
+  public void setStandingsId(String standingsId) {
     this.standingsId = standingsId;
   }
 

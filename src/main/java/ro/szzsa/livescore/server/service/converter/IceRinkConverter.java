@@ -25,6 +25,7 @@ public class IceRinkConverter implements DaoConverter<IceRink, ro.szzsa.livescor
       return null;
     }
     IceRink iceRink = new IceRink();
+    iceRink.setId(entity.getId());
     iceRink.setName(entity.getName());
     iceRink.setCapacity(entity.getCapacity());
     iceRink.setAddress(entity.getAddress());
@@ -36,10 +37,11 @@ public class IceRinkConverter implements DaoConverter<IceRink, ro.szzsa.livescor
   @Override
   public ro.szzsa.livescore.server.repository.model.IceRink toEntity(IceRink iceRink) {
     ro.szzsa.livescore.server.repository.model.IceRink entity = new ro.szzsa.livescore.server.repository.model.IceRink();
-    entity.setName(iceRink.getName());
-    if (dao.exists(iceRink.getName())) {
-      entity = dao.findOne(iceRink.getName());
+    entity.setId(iceRink.getId());
+    if (dao.exists(iceRink.getId())) {
+      entity = dao.findOne(iceRink.getId());
     }
+    entity.setName(iceRink.getName());
     entity.setCapacity(iceRink.getCapacity());
     entity.setAddress(iceRink.getAddress());
     entity.setLatitude(iceRink.getLatitude());

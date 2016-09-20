@@ -37,6 +37,7 @@ dependencies {
   compile group: 'ro.szzsa.livescore', name: 'livescore-management-api', version: livescoreManagementApiVersion
   compile group: 'ro.szzsa.livescore', name: 'livescore-device-api', version: livescoreDeviceApiVersion
   compile group: 'ro.szzsa.utils', name: 'converter', version: converterVersion
+  compile group: 'ro.szzsa.utils', name: 'connector', version: connectorVersion
   compile group: 'javax.servlet', name: 'javax.servlet-api', version: javaxServletApiVersion
   compile group: 'org.springframework', name: 'spring-webmvc', version: springFrameworkVersion
   compile group: 'org.springframework', name: 'spring-context-support', version: springFrameworkVersion

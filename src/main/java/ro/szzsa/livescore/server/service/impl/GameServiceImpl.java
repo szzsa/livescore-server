@@ -49,7 +49,11 @@ public class GameServiceImpl implements GameService {
     if (game == null) {
       return;
     }
-    checkLiveGameEvents(game, getGame(game.getId()));
+    Game oldGame = getGame(game.getId());
+    if ((oldGame != null && GameStatus.LIVE.equals(oldGame.getStatus()))
+      || GameStatus.LIVE.equals(game.getStatus())) {
+      checkLiveGameEvents(oldGame, game);
+    }
     dao.save(converter.toEntity(game));
   }
 
@@ -67,37 +71,46 @@ public class GameServiceImpl implements GameService {
     return games;
   }
 
-  private void checkLiveGameEvents(Game newGame, Game game) {
-    if (areGoalsChanged(newGame, game) ||
-      arePenaltiesChanged(newGame, game) ||
-      isTimeChanged(newGame, game) ||
-      isStatusChanged(newGame)) {
+  private void checkLiveGameEvents(Game oldGame, Game game) {
+    if (areGoalsChanged(oldGame, game) ||
+      arePenaltiesChanged(oldGame, game) ||
+      isTimeChanged(oldGame, game) ||
+      isStatusChanged(game)) {
       notificationService.sendNotification(game);
     }
   }
 
-  private boolean areGoalsChanged(Game newGame, Game game) {
-    if (game.getGoals() == null) {
-      return newGame.getGoals().size() > 0;
+  private boolean areGoalsChanged(Game oldGame, Game game) {
+    if (oldGame == null) {
+      return true;
     }
-    return newGame.getGoals().size() != game.getGoals().size();
+    if (oldGame.getGoals() == null) {
+      return game.getGoals() != null && game.getGoals().size() > 0;
+    }
+    return game.getGoals().size() != oldGame.getGoals().size();
   }
 
-  private boolean arePenaltiesChanged(Game newGame, Game game) {
-    if (game.getPenalties() == null) {
-      return newGame.getPenalties().size() > 0;
+  private boolean arePenaltiesChanged(Game oldGame, Game game) {
+    if (oldGame == null) {
+      return true;
     }
-    return newGame.getPenalties().size() != game.getPenalties().size();
+    if (oldGame.getPenalties() == null) {
+      return game.getPenalties() != null && game.getPenalties().size() > 0;
+    }
+    return game.getPenalties().size() != oldGame.getPenalties().size();
   }
 
-  private boolean isTimeChanged(Game newGame, Game game) {
-    if (game.getTime() == null) {
-      return newGame.getTime().length() > 0;
+  private boolean isTimeChanged(Game oldGame, Game game) {
+    if (oldGame == null) {
+      return true;
     }
-    return !newGame.getTime().equals(game.getTime());
+    if (oldGame.getTime() == null) {
+      return game.getTime() != null && game.getTime().length() > 0;
+    }
+    return !game.getTime().equals(oldGame.getTime());
   }
 
-  private boolean isStatusChanged(Game newGame) {
-    return !GameStatus.LIVE.equals(newGame.getStatus());
+  private boolean isStatusChanged(Game game) {
+    return !GameStatus.LIVE.equals(game.getStatus());
   }
 }

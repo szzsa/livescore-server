@@ -21,7 +21,9 @@ public class NotificationServiceImpl implements NotificationService {
 
   private static final String FCM_SEND_URL = "https://fcm.googleapis.com/fcm/send";
 
-  private static final String STATS_TOPIC = "/topics/stats";
+  private static final String STATS_TOPIC = "/topics/test";
+
+  private static final String API_KEY = "AIzaSyB3NhdQSWGcOHn0CSAfip4h11AcXjw95hM";
 
   private final Converter converter;
 
@@ -30,6 +32,7 @@ public class NotificationServiceImpl implements NotificationService {
   public NotificationServiceImpl() {
     this.converter = Converters.createJsonConverter();
     this.connector = Connectors.customHttpConnector()
+      .setApiKey(API_KEY)
       .build();
   }
 

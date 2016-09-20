@@ -53,6 +53,6 @@ public class PenaltyConverter implements DaoConverter<Penalty, ro.szzsa.livescor
   }
 
   private String calculateId(Penalty penalty) {
-    return penalty.getGameId() + "-" + penalty.getTime();
+    return penalty.getGameId() + "-" + penalty.getTime() + "-" + penalty.getType().name();
   }
 }

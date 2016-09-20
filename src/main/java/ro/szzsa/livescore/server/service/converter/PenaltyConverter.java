@@ -1,10 +1,5 @@
 package ro.szzsa.livescore.server.service.converter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +32,7 @@ public class PenaltyConverter implements DaoConverter<Penalty, ro.szzsa.livescor
     penalty.setTeamCode(entity.getTeamCode());
     penalty.setTime(entity.getTime());
     penalty.setPlayer(entity.getPlayer());
-    penalty.setTypes(convertPenaltyTypes(entity.getTypes()));
+    penalty.setType(PenaltyType.valueOf(entity.getType()));
     return penalty;
   }
 
@@ -53,17 +48,8 @@ public class PenaltyConverter implements DaoConverter<Penalty, ro.szzsa.livescor
     entity.setTeamCode(penalty.getTeamCode());
     entity.setTime(penalty.getTime());
     entity.setPlayer(penalty.getPlayer());
-    entity.setTypes(StringUtils.join(penalty.getTypes(), SEPARATOR));
+    entity.setType(penalty.getType().name());
     return entity;
-  }
-
-  private List<PenaltyType> convertPenaltyTypes(String entity) {
-    if (entity == null) {
-      return null;
-    }
-    List<PenaltyType> penaltyTypes = new ArrayList<>();
-    Arrays.asList(entity.split(SEPARATOR)).forEach(type -> penaltyTypes.add(PenaltyType.valueOf(type)));
-    return penaltyTypes;
   }
 
   private String calculateId(Penalty penalty) {

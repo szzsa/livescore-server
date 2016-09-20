@@ -39,6 +39,7 @@ public class PersistenceConfig {
 
     Properties properties = new Properties();
     properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+    properties.setProperty("hibernate.event.merge.entity_copy_observer", "allow");
     em.setJpaProperties(properties);
 
     return em;

@@ -12,7 +12,7 @@ public class Penalty {
   @Id
   private String id;
 
-  private String types;
+  private String type;
 
   private String gameId;
 
@@ -30,12 +30,12 @@ public class Penalty {
     this.id = id;
   }
 
-  public String getTypes() {
-    return types;
+  public String getType() {
+    return type;
   }
 
-  public void setTypes(String types) {
-    this.types = types;
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getGameId() {

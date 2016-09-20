@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ro.szzsa.livescore.model.Goal;
+import ro.szzsa.livescore.model.GoalType;
 import ro.szzsa.livescore.server.repository.dao.GoalDao;
 
 /**
@@ -30,6 +31,7 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
       return null;
     }
     Goal goal = new Goal();
+    goal.setType(GoalType.valueOf(entity.getType()));
     goal.setGameId(entity.getGameId());
     goal.setTeamCode(entity.getTeamCode());
     goal.setTime(entity.getTime());
@@ -48,6 +50,7 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
     if (dao.exists(id)) {
       entity = dao.findOne(id);
     }
+    entity.setType(goal.getType().name());
     entity.setGameId(goal.getGameId());
     entity.setTeamCode(goal.getTeamCode());
     entity.setTime(goal.getTime());

@@ -12,6 +12,8 @@ public class Goal {
   @Id
   private String id;
 
+  private String type;
+
   private String gameId;
 
   private String teamCode;
@@ -28,6 +30,14 @@ public class Goal {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getGameId() {

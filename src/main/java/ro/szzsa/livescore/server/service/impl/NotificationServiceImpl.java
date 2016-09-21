@@ -1,5 +1,6 @@
 package ro.szzsa.livescore.server.service.impl;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import ro.szzsa.livescore.model.Game;
@@ -36,6 +37,7 @@ public class NotificationServiceImpl implements NotificationService {
       .build();
   }
 
+  @Async
   @Override
   public void sendNotification(Game game) {
     Notification notification = new Notification();

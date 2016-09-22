@@ -32,9 +32,7 @@ public class NotificationServiceImpl implements NotificationService {
 
   public NotificationServiceImpl() {
     this.converter = Converters.createJsonConverter();
-    this.connector = Connectors.customHttpConnector()
-      .setApiKey(API_KEY)
-      .build();
+    this.connector = Connectors.withApiKey(API_KEY).build();
   }
 
   @Async

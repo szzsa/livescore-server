@@ -47,8 +47,7 @@ dependencies {
   compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion
   compile group: 'org.springframework.security', name: 'spring-security-config', version: springSecurityVersion
   compile group: 'org.springframework.security', name: 'spring-security-web', version: springSecurityVersion
-  compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
-  compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: jclOverSlf4jVersion
+  compile group: 'log4j', name: 'log4j', version: log4jVersion
   compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
   compile group: 'org.apache.commons', name: 'commons-lang3', version: commonsLangVersion
   testCompile group: 'junit', name: 'junit', version: junitVersion

@@ -1,5 +1,6 @@
 package ro.szzsa.livescore.server.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class NotificationServiceImpl implements NotificationService {
 
   private static final String API_KEY = "AIzaSyB3NhdQSWGcOHn0CSAfip4h11AcXjw95hM";
 
+  private final static Logger LOGGER = Logger.getLogger(NotificationServiceImpl.class);
+
   private final Converter converter;
 
   private final Connector connector;
@@ -46,7 +49,7 @@ public class NotificationServiceImpl implements NotificationService {
     try {
       connector.sendRequest(new Request(FCM_SEND_URL, converter.toString(notification)));
     } catch (ConnectorException e) {
-      e.printStackTrace();
+      LOGGER.error("Cannot send notification", e);
     }
   }
 }

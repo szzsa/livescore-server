@@ -53,6 +53,10 @@ dependencies {
   testCompile 'junit:junit:4.12'
 }
 
+configurations.all {
+  exclude group: "commons-logging", module: "commons-logging"
+}
+
 war.archiveName "ROOT.war"
 
 def nexusUrl = project.hasProperty('nexusUrl') ? nexusUrl : ''

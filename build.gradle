@@ -34,7 +34,7 @@ task wrapper(type: Wrapper) {
 
 dependencies {
   compile 'ro.szzsa.livescore:livescore-administration-api:1.0'
-  compile 'ro.szzsa.livescore:livescore-management-api:1.0:'
+  compile 'ro.szzsa.livescore:livescore-management-api:1.0'
   compile 'ro.szzsa.livescore:livescore-device-api:1.0'
   compile 'ro.szzsa.utils:converter:1.0'
   compile 'ro.szzsa.utils:httpconnector:1.0'

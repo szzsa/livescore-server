@@ -1,10 +1,10 @@
 package ro.szzsa.livescore.server.service.converter;
 
-import java.util.Arrays;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 import ro.szzsa.livescore.model.Goal;
 import ro.szzsa.livescore.model.GoalType;
@@ -33,7 +33,8 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
     Goal goal = new Goal();
     goal.setType(GoalType.valueOf(entity.getType()));
     goal.setGameId(entity.getGameId());
-    goal.setTeamCode(entity.getTeamCode());
+    goal.setTeamId(entity.getTeamId());
+    goal.setOrder(entity.getOrderInGame());
     goal.setTime(entity.getTime());
     goal.setAuthor(entity.getAuthor());
     if (entity.getAssists() != null) {
@@ -45,14 +46,15 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
   @Override
   public ro.szzsa.livescore.server.repository.model.Goal toEntity(Goal goal) {
     ro.szzsa.livescore.server.repository.model.Goal entity = new ro.szzsa.livescore.server.repository.model.Goal();
-    String id = calculateId(goal);
+    long id = calculateId(goal);
     entity.setId(id);
     if (dao.exists(id)) {
       entity = dao.findOne(id);
     }
     entity.setType(goal.getType().name());
     entity.setGameId(goal.getGameId());
-    entity.setTeamCode(goal.getTeamCode());
+    entity.setTeamId(goal.getTeamId());
+    entity.setOrderInGame(goal.getOrder());
     entity.setTime(goal.getTime());
     entity.setAuthor(goal.getAuthor());
     if (goal.getAssists() != null) {
@@ -61,7 +63,7 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
     return entity;
   }
 
-  private String calculateId(Goal goal) {
-    return goal.getGameId() + "-" + goal.getTime();
+  private long calculateId(Goal goal) {
+    return Long.parseLong(String.valueOf(goal.getGameId()) + "00" + String.valueOf(goal.getOrder()));
   }
 }

@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.Team;
 /**
  *
  */
-public interface TeamDao extends CrudRepository<Team, String> {
+public interface TeamDao extends CrudRepository<Team, Long> {
 }

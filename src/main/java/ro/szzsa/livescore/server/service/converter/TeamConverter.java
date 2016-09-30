@@ -29,6 +29,7 @@ public class TeamConverter implements DaoConverter<Team, ro.szzsa.livescore.serv
       return null;
     }
     Team team = new Team();
+    team.setId(entity.getId());
     team.setCode(entity.getCode());
     team.setName(entity.getName());
     team.setCity(entity.getCity());
@@ -44,10 +45,11 @@ public class TeamConverter implements DaoConverter<Team, ro.szzsa.livescore.serv
   @Override
   public ro.szzsa.livescore.server.repository.model.Team toEntity(Team team) {
     ro.szzsa.livescore.server.repository.model.Team entity = new ro.szzsa.livescore.server.repository.model.Team();
-    entity.setCode(team.getCode());
-    if (dao.exists(team.getCode())) {
-      entity = dao.findOne(team.getCode());
+    entity.setId(team.getId());
+    if (dao.exists(team.getId())) {
+      entity = dao.findOne(team.getId());
     }
+    entity.setCode(team.getCode());
     entity.setName(team.getName());
     entity.setCity(team.getCity());
     entity.setCountry(team.getCountry());

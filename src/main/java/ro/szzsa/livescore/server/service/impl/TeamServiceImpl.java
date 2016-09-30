@@ -1,10 +1,10 @@
 package ro.szzsa.livescore.server.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ro.szzsa.livescore.model.Team;
 import ro.szzsa.livescore.server.repository.dao.TeamDao;
@@ -46,8 +46,8 @@ public class TeamServiceImpl implements TeamService {
     if (team == null) {
       return;
     }
-    if (dao.exists(team.getCode())) {
-      dao.delete(team.getCode());
+    if (dao.exists(team.getId())) {
+      dao.delete(team.getId());
     }
   }
 

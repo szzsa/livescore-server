@@ -9,7 +9,7 @@ import ro.szzsa.livescore.model.Game;
  */
 public interface GameService {
 
-  Game getGame(String id);
+  Game getGame(long id);
 
   List<Game> getGames();
 

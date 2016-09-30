@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.Standings;
 /**
  *
  */
-public interface StandingsDao extends CrudRepository<Standings, String> {
+public interface StandingsDao extends CrudRepository<Standings, Long> {
 }

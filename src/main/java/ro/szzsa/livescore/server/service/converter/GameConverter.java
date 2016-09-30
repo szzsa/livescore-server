@@ -1,12 +1,12 @@
 package ro.szzsa.livescore.server.service.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import ro.szzsa.livescore.model.Game;
 import ro.szzsa.livescore.model.GameStatus;
@@ -42,11 +42,12 @@ public class GameConverter implements DaoConverter<Game, ro.szzsa.livescore.serv
     }
     Game game = new Game();
     game.setId(entity.getId());
+    game.setCode(entity.getCode());
     game.setDate(entity.getDate());
     game.setStatus(GameStatus.valueOf(entity.getStatus()));
     game.setTime(entity.getTime());
-    game.setHomeTeamCode(entity.getHomeTeamCode());
-    game.setVisitorTeamCode(entity.getVisitorTeamCode());
+    game.setHomeTeamId(entity.getHomeTeamId());
+    game.setVisitorTeamId(entity.getVisitorTeamId());
     game.setHomeTeamScore(entity.getHomeTeamScore());
     game.setVisitorTeamScore(entity.getVisitorTeamScore());
     game.setGoals(convertGoals(entity.getGoals()));
@@ -61,11 +62,12 @@ public class GameConverter implements DaoConverter<Game, ro.szzsa.livescore.serv
     if (dao.exists(game.getId())) {
       entity = dao.findOne(game.getId());
     }
+    entity.setCode(game.getCode());
     entity.setDate(game.getDate());
     entity.setStatus(game.getStatus().name());
     entity.setTime(game.getTime());
-    entity.setHomeTeamCode(game.getHomeTeamCode());
-    entity.setVisitorTeamCode(game.getVisitorTeamCode());
+    entity.setHomeTeamId(game.getHomeTeamId());
+    entity.setVisitorTeamId(game.getVisitorTeamId());
     entity.setHomeTeamScore(game.getHomeTeamScore());
     entity.setVisitorTeamScore(game.getVisitorTeamScore());
     entity.setGoals(convertGoalsToEntities(game.getGoals()));

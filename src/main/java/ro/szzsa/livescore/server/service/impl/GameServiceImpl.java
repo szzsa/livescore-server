@@ -1,10 +1,10 @@
 package ro.szzsa.livescore.server.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ro.szzsa.livescore.model.Game;
 import ro.szzsa.livescore.model.GameStatus;
@@ -35,7 +35,7 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game getGame(String id) {
+  public Game getGame(long id) {
     return converter.toModel(dao.findOne(id));
   }
 

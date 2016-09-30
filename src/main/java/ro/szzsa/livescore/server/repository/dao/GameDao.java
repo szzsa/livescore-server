@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.Game;
 /**
  *
  */
-public interface GameDao extends CrudRepository<Game, String> {
+public interface GameDao extends CrudRepository<Game, Long> {
 }

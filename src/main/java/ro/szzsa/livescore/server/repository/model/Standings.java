@@ -1,6 +1,7 @@
 package ro.szzsa.livescore.server.repository.model;
 
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,35 +15,27 @@ import javax.persistence.OneToMany;
 public class Standings {
 
   @Id
-  private String id;
+  private long id;
 
-  private String title;
+  private long leaguePhaseId;
 
   @OneToMany(mappedBy = "standingsId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<TeamStats> stats;
 
-  private boolean isPlayoff;
-
-  private int seriesLimit;
-
-  private boolean active;
-
-  private String places;
-
-  public String getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public String getTitle() {
-    return title;
+  public long getLeaguePhaseId() {
+    return leaguePhaseId;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setLeaguePhaseId(long leaguePhaseId) {
+    this.leaguePhaseId = leaguePhaseId;
   }
 
   public Set<TeamStats> getStats() {
@@ -51,37 +44,5 @@ public class Standings {
 
   public void setStats(Set<TeamStats> stats) {
     this.stats = stats;
-  }
-
-  public boolean isPlayoff() {
-    return isPlayoff;
-  }
-
-  public void setPlayoff(boolean playoff) {
-    isPlayoff = playoff;
-  }
-
-  public int getSeriesLimit() {
-    return seriesLimit;
-  }
-
-  public void setSeriesLimit(int seriesLimit) {
-    this.seriesLimit = seriesLimit;
-  }
-
-  public boolean isActive() {
-    return active;
-  }
-
-  public void setActive(boolean active) {
-    this.active = active;
-  }
-
-  public String getPlaces() {
-    return places;
-  }
-
-  public void setPlaces(String places) {
-    this.places = places;
   }
 }

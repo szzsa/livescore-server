@@ -1,6 +1,7 @@
 package ro.szzsa.livescore.server.repository.model;
 
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,11 +15,13 @@ import javax.persistence.OneToMany;
 public class Game {
 
   @Id
-  private String id;
+  private long id;
 
-  private String homeTeamCode;
+  private String code;
 
-  private String visitorTeamCode;
+  private long homeTeamId;
+
+  private long visitorTeamId;
 
   private long date;
 
@@ -36,28 +39,36 @@ public class Game {
   @OneToMany(mappedBy = "gameId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Penalty> penalties;
 
-  public String getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public String getHomeTeamCode() {
-    return homeTeamCode;
+  public String getCode() {
+    return code;
   }
 
-  public void setHomeTeamCode(String homeTeamCode) {
-    this.homeTeamCode = homeTeamCode;
+  public void setCode(String code) {
+    this.code = code;
   }
 
-  public String getVisitorTeamCode() {
-    return visitorTeamCode;
+  public long getHomeTeamId() {
+    return homeTeamId;
   }
 
-  public void setVisitorTeamCode(String visitorTeamCode) {
-    this.visitorTeamCode = visitorTeamCode;
+  public void setHomeTeamId(long homeTeamId) {
+    this.homeTeamId = homeTeamId;
+  }
+
+  public long getVisitorTeamId() {
+    return visitorTeamId;
+  }
+
+  public void setVisitorTeamId(long visitorTeamId) {
+    this.visitorTeamId = visitorTeamId;
   }
 
   public long getDate() {

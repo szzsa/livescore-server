@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.Goal;
 /**
  *
  */
-public interface GoalDao extends CrudRepository<Goal, String> {
+public interface GoalDao extends CrudRepository<Goal, Long> {
 }

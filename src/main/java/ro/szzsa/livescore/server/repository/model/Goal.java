@@ -10,13 +10,15 @@ import javax.persistence.Id;
 public class Goal {
 
   @Id
-  private String id;
+  private long id;
+
+  private long gameId;
+
+  private long teamId;
+
+  private int orderInGame;
 
   private String type;
-
-  private String gameId;
-
-  private String teamCode;
 
   private String author;
 
@@ -24,12 +26,36 @@ public class Goal {
 
   private String time;
 
-  public String getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
+  }
+
+  public long getGameId() {
+    return gameId;
+  }
+
+  public void setGameId(long gameId) {
+    this.gameId = gameId;
+  }
+
+  public long getTeamId() {
+    return teamId;
+  }
+
+  public void setTeamId(long teamId) {
+    this.teamId = teamId;
+  }
+
+  public int getOrderInGame() {
+    return orderInGame;
+  }
+
+  public void setOrderInGame(int orderInGame) {
+    this.orderInGame = orderInGame;
   }
 
   public String getType() {
@@ -38,22 +64,6 @@ public class Goal {
 
   public void setType(String type) {
     this.type = type;
-  }
-
-  public String getGameId() {
-    return gameId;
-  }
-
-  public void setGameId(String gameId) {
-    this.gameId = gameId;
-  }
-
-  public String getTeamCode() {
-    return teamCode;
-  }
-
-  public void setTeamCode(String teamCode) {
-    this.teamCode = teamCode;
   }
 
   public String getAuthor() {

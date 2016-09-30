@@ -7,5 +7,5 @@ import ro.szzsa.livescore.server.repository.model.IceRink;
 /**
  *
  */
-public interface IceRinkDao extends CrudRepository<IceRink, String> {
+public interface IceRinkDao extends CrudRepository<IceRink, Long> {
 }

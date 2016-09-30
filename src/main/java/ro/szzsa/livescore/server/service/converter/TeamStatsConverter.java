@@ -10,7 +10,8 @@ import ro.szzsa.livescore.server.repository.dao.TeamStatsDao;
  *
  */
 @Service
-public class TeamStatsConverter implements DaoConverter<TeamStats, ro.szzsa.livescore.server.repository.model.TeamStats> {
+public class TeamStatsConverter
+    implements DaoConverter<TeamStats, ro.szzsa.livescore.server.repository.model.TeamStats> {
 
   private final TeamStatsDao dao;
 
@@ -25,7 +26,7 @@ public class TeamStatsConverter implements DaoConverter<TeamStats, ro.szzsa.live
       return null;
     }
     TeamStats stats = new TeamStats();
-    stats.setTeamCode(entity.getTeamCode());
+    stats.setTeamId(entity.getTeamId());
     stats.setGamesPlayed(entity.getGamesPlayed());
     stats.setGoalsAgainst(entity.getGoalsAgainst());
     stats.setGoalsFor(entity.getGoalsFor());
@@ -41,13 +42,14 @@ public class TeamStatsConverter implements DaoConverter<TeamStats, ro.szzsa.live
 
   @Override
   public ro.szzsa.livescore.server.repository.model.TeamStats toEntity(TeamStats teamStats) {
-    ro.szzsa.livescore.server.repository.model.TeamStats entity = new ro.szzsa.livescore.server.repository.model.TeamStats();
-    String id = calculateId(teamStats);
+    ro.szzsa.livescore.server.repository.model.TeamStats entity =
+        new ro.szzsa.livescore.server.repository.model.TeamStats();
+    long id = calculateId(teamStats);
     entity.setId(id);
     if (dao.exists(id)) {
       entity = dao.findOne(id);
     }
-    entity.setTeamCode(teamStats.getTeamCode());
+    entity.setTeamId(teamStats.getTeamId());
     entity.setGamesPlayed(teamStats.getGamesPlayed());
     entity.setGoalsAgainst(teamStats.getGoalsAgainst());
     entity.setGoalsFor(teamStats.getGoalsFor());
@@ -61,7 +63,7 @@ public class TeamStatsConverter implements DaoConverter<TeamStats, ro.szzsa.live
     return entity;
   }
 
-  private String calculateId(TeamStats teamStats) {
-    return teamStats.getStandingsId() + "-" + teamStats.getTeamCode();
+  private long calculateId(TeamStats teamStats) {
+    return Long.parseLong(String.valueOf(teamStats.getStandingsId()) + "00" + String.valueOf(teamStats.getTeamId()));
   }
 }

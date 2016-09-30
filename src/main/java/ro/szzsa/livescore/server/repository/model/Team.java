@@ -1,6 +1,7 @@
 package ro.szzsa.livescore.server.repository.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -13,6 +14,9 @@ import javax.persistence.ManyToOne;
 public class Team {
 
   @Id
+  private long id;
+
+  @Column(unique = true)
   private String code;
 
   private String name;
@@ -31,6 +35,14 @@ public class Team {
   private String awayColor;
 
   private int yearFounded;
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
 
   public String getCode() {
     return code;

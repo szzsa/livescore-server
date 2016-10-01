@@ -1,7 +1,5 @@
 package ro.szzsa.livescore.server.config;
 
-import java.util.concurrent.Executor;
-
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +10,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.concurrent.Executor;
+
 /**
  *
  */
@@ -19,12 +19,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @EnableAsync
 @ComponentScan({
-  "ro.szzsa.livescore.server.controller",
-  "ro.szzsa.livescore.server.service"
+    "ro.szzsa.livescore.server.controller",
+    "ro.szzsa.livescore.server.service"
 })
 @Import({
-  SecurityConfig.class,
-  PersistenceConfig.class
+    SecurityConfig.class,
+    PersistenceConfig.class
 })
 public class WebMvcConfig extends WebMvcConfigurerAdapter implements AsyncConfigurer {
 

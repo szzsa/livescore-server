@@ -36,7 +36,9 @@ public class IceRinkConverter implements DaoConverter<IceRink, ro.szzsa.livescor
 
   @Override
   public ro.szzsa.livescore.server.repository.model.IceRink toEntity(IceRink iceRink) {
-    ro.szzsa.livescore.server.repository.model.IceRink entity = new ro.szzsa.livescore.server.repository.model.IceRink();
+    ro.szzsa.livescore.server.repository.model.IceRink
+        entity =
+        new ro.szzsa.livescore.server.repository.model.IceRink();
     entity.setId(iceRink.getId());
     if (dao.exists(iceRink.getId())) {
       entity = dao.findOne(iceRink.getId());

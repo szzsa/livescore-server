@@ -1,10 +1,10 @@
 package ro.szzsa.livescore.server.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ro.szzsa.livescore.model.IceRink;
 import ro.szzsa.livescore.server.repository.dao.IceRinkDao;

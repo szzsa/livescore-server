@@ -36,14 +36,14 @@ public class AdministrationApiV1ControllerImpl implements AdministrationApiV1Con
   }
 
   @PostMapping(value = AdministrationApiEndpoints.GET_TEAMS_PATH,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public String getTeams() {
     return converter.toString(teamService.getTeams());
   }
 
   @PostMapping(value = AdministrationApiEndpoints.UPDATE_TEAM_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void updateTeam(String teamUpdateRequest) {
     TeamUpdateRequest request = converter.fromString(teamUpdateRequest, TeamUpdateRequest.class);
@@ -51,7 +51,7 @@ public class AdministrationApiV1ControllerImpl implements AdministrationApiV1Con
   }
 
   @PostMapping(value = AdministrationApiEndpoints.DELETE_TEAM_PATH,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void deleteTeam(String teamUpdateRequest) {
     TeamUpdateRequest request = converter.fromString(teamUpdateRequest, TeamUpdateRequest.class);
@@ -59,14 +59,14 @@ public class AdministrationApiV1ControllerImpl implements AdministrationApiV1Con
   }
 
   @PostMapping(value = AdministrationApiEndpoints.GET_ICE_RINKS_PATH,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public String getIceRinks() {
     return converter.toString(iceRinkService.getIceRinks());
   }
 
   @PostMapping(value = AdministrationApiEndpoints.UPDATE_ICE_RINK_PATH,
-    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void updateIceRink(String iceRinkUpdateRequest) {
     IceRinkUpdateRequest request = converter.fromString(iceRinkUpdateRequest, IceRinkUpdateRequest.class);
@@ -74,7 +74,7 @@ public class AdministrationApiV1ControllerImpl implements AdministrationApiV1Con
   }
 
   @PostMapping(value = AdministrationApiEndpoints.DELETE_ICE_RINK_PATH,
-    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Override
   public void deleteIceRink(String iceRinkUpdateRequest) {
     IceRinkUpdateRequest request = converter.fromString(iceRinkUpdateRequest, IceRinkUpdateRequest.class);

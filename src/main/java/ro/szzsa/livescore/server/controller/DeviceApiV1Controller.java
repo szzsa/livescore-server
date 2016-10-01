@@ -5,9 +5,9 @@ package ro.szzsa.livescore.server.controller;
  */
 public interface DeviceApiV1Controller {
 
-  String getGameDetails(String gameDetailsRequest);
+  String syncGame(String gameSyncRequest);
 
-  String getStats();
+  String syncStats();
 
   String syncVersion(String versionSyncRequest);
 }

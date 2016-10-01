@@ -51,7 +51,7 @@ public class GameServiceImpl implements GameService {
     }
     Game oldGame = getGame(game.getId());
     if ((oldGame != null && GameStatus.LIVE.equals(oldGame.getStatus()))
-      || GameStatus.LIVE.equals(game.getStatus())) {
+        || GameStatus.LIVE.equals(game.getStatus())) {
       checkLiveGameEvents(oldGame, game);
     }
     dao.save(converter.toEntity(game));
@@ -73,9 +73,9 @@ public class GameServiceImpl implements GameService {
 
   private void checkLiveGameEvents(Game oldGame, Game game) {
     if (areGoalsChanged(oldGame, game) ||
-      arePenaltiesChanged(oldGame, game) ||
-      isTimeChanged(oldGame, game) ||
-      isStatusChanged(game)) {
+        arePenaltiesChanged(oldGame, game) ||
+        isTimeChanged(oldGame, game) ||
+        isStatusChanged(game)) {
       notificationService.sendNotification(game);
     }
   }

@@ -1,8 +1,6 @@
 package ro.szzsa.livescore.server.config;
 
-import java.util.Properties;
-import javax.sql.DataSource;
-
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -12,15 +10,17 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import org.hibernate.jpa.HibernatePersistenceProvider;
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 /**
  *
  */
 @Configuration
 @EnableJpaRepositories(
-  basePackages = "ro.szzsa.livescore.server.repository.dao",
-  entityManagerFactoryRef = "entityManager"
+    basePackages = "ro.szzsa.livescore.server.repository.dao",
+    entityManagerFactoryRef = "entityManager"
 )
 public class PersistenceConfig {
 

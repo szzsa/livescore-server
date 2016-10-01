@@ -10,7 +10,7 @@ import ro.szzsa.livescore.server.repository.dao.TeamDao;
  *
  */
 @Service
-public class TeamConverter implements DaoConverter<Team, ro.szzsa.livescore.server.repository.model.Team> {
+public class TeamConverter implements Converter<Team, ro.szzsa.livescore.server.repository.model.Team> {
 
   private final TeamDao dao;
 
@@ -28,36 +28,36 @@ public class TeamConverter implements DaoConverter<Team, ro.szzsa.livescore.serv
     if (entity == null) {
       return null;
     }
-    Team team = new Team();
-    team.setId(entity.getId());
-    team.setCode(entity.getCode());
-    team.setName(entity.getName());
-    team.setCity(entity.getCity());
-    team.setCountry(entity.getCountry());
-    team.setYearFounded(entity.getYearFounded());
-    team.setTimeZone(entity.getTimeZone());
-    team.setIceRink(iceRinkConverter.toModel(entity.getIceRink()));
-    team.setHomeColor(entity.getHomeColor());
-    team.setAwayColor(entity.getAwayColor());
-    return team;
+    Team model = new Team();
+    model.setId(entity.getId());
+    model.setCode(entity.getCode());
+    model.setName(entity.getName());
+    model.setCity(entity.getCity());
+    model.setCountry(entity.getCountry());
+    model.setYearFounded(entity.getYearFounded());
+    model.setTimeZone(entity.getTimeZone());
+    model.setIceRink(iceRinkConverter.toModel(entity.getIceRink()));
+    model.setHomeColor(entity.getHomeColor());
+    model.setAwayColor(entity.getAwayColor());
+    return model;
   }
 
   @Override
-  public ro.szzsa.livescore.server.repository.model.Team toEntity(Team team) {
+  public ro.szzsa.livescore.server.repository.model.Team toEntity(Team model) {
     ro.szzsa.livescore.server.repository.model.Team entity = new ro.szzsa.livescore.server.repository.model.Team();
-    entity.setId(team.getId());
-    if (dao.exists(team.getId())) {
-      entity = dao.findOne(team.getId());
+    entity.setId(model.getId());
+    if (dao.exists(model.getId())) {
+      entity = dao.findOne(model.getId());
     }
-    entity.setCode(team.getCode());
-    entity.setName(team.getName());
-    entity.setCity(team.getCity());
-    entity.setCountry(team.getCountry());
-    entity.setYearFounded(team.getYearFounded());
-    entity.setTimeZone(team.getTimeZone());
-    entity.setIceRink(iceRinkConverter.toEntity(team.getIceRink()));
-    entity.setHomeColor(team.getHomeColor());
-    entity.setAwayColor(team.getAwayColor());
+    entity.setCode(model.getCode());
+    entity.setName(model.getName());
+    entity.setCity(model.getCity());
+    entity.setCountry(model.getCountry());
+    entity.setYearFounded(model.getYearFounded());
+    entity.setTimeZone(model.getTimeZone());
+    entity.setIceRink(iceRinkConverter.toEntity(model.getIceRink()));
+    entity.setHomeColor(model.getHomeColor());
+    entity.setAwayColor(model.getAwayColor());
     return entity;
   }
 }

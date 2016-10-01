@@ -3,13 +3,7 @@ package ro.szzsa.livescore.server.service.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import ro.szzsa.livescore.model.Standings;
-import ro.szzsa.livescore.model.TeamStats;
 import ro.szzsa.livescore.server.repository.dao.StandingsDao;
 
 /**
@@ -17,17 +11,17 @@ import ro.szzsa.livescore.server.repository.dao.StandingsDao;
  */
 @Service
 public class StandingsConverter
-    implements DaoConverter<Standings, ro.szzsa.livescore.server.repository.model.Standings> {
+    implements Converter<Standings, ro.szzsa.livescore.server.repository.model.Standings> {
 
   private final StandingsDao dao;
 
-  private final TeamStatsConverter statsConverter;
+  private final TeamStatsCollectionConverter teamStatsCollectionConverter;
 
   @Autowired
   public StandingsConverter(StandingsDao dao,
                             TeamStatsConverter statsConverter) {
     this.dao = dao;
-    this.statsConverter = statsConverter;
+    teamStatsCollectionConverter = new TeamStatsCollectionConverter(statsConverter);
   }
 
   @Override
@@ -35,41 +29,23 @@ public class StandingsConverter
     if (entity == null) {
       return null;
     }
-    Standings standings = new Standings();
-    standings.setId(entity.getId());
-    standings.setLeaguePhaseId(entity.getLeaguePhaseId());
-    standings.setStats(convertEntitiesToStats(entity.getStats()));
-    return standings;
+    Standings model = new Standings();
+    model.setId(entity.getId());
+    model.setLeaguePhaseId(entity.getLeaguePhaseId());
+    model.setStats(teamStatsCollectionConverter.toModel(entity.getStats()));
+    return model;
   }
 
   @Override
-  public ro.szzsa.livescore.server.repository.model.Standings toEntity(Standings standings) {
+  public ro.szzsa.livescore.server.repository.model.Standings toEntity(Standings model) {
     ro.szzsa.livescore.server.repository.model.Standings entity =
         new ro.szzsa.livescore.server.repository.model.Standings();
-    entity.setId(standings.getId());
-    if (dao.exists(standings.getId())) {
-      entity = dao.findOne(standings.getId());
+    entity.setId(model.getId());
+    if (dao.exists(model.getId())) {
+      entity = dao.findOne(model.getId());
     }
-    entity.setLeaguePhaseId(standings.getLeaguePhaseId());
-    entity.setStats(convertStatsToEntities(standings.getStats()));
+    entity.setLeaguePhaseId(model.getLeaguePhaseId());
+    entity.setStats(teamStatsCollectionConverter.toEntity(model.getStats()));
     return entity;
-  }
-
-  private List<TeamStats> convertEntitiesToStats(Set<ro.szzsa.livescore.server.repository.model.TeamStats> entities) {
-    if (entities == null) {
-      return null;
-    }
-    List<TeamStats> stats = new ArrayList<>(entities.size());
-    entities.forEach(teamStats -> stats.add(statsConverter.toModel(teamStats)));
-    return stats;
-  }
-
-  private Set<ro.szzsa.livescore.server.repository.model.TeamStats> convertStatsToEntities(List<TeamStats> stats) {
-    if (stats == null) {
-      return null;
-    }
-    Set<ro.szzsa.livescore.server.repository.model.TeamStats> entities = new HashSet<>(stats.size());
-    stats.forEach(teamStats -> entities.add(statsConverter.toEntity(teamStats)));
-    return entities;
   }
 }

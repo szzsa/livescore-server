@@ -3,13 +3,7 @@ package ro.szzsa.livescore.server.service.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import ro.szzsa.livescore.model.LeaguePhase;
-import ro.szzsa.livescore.model.Standings;
 import ro.szzsa.livescore.server.repository.dao.LeaguePhaseDao;
 
 /**
@@ -17,17 +11,17 @@ import ro.szzsa.livescore.server.repository.dao.LeaguePhaseDao;
  */
 @Service
 public class LeaguePhaseConverter
-    implements DaoConverter<LeaguePhase, ro.szzsa.livescore.server.repository.model.LeaguePhase> {
+    implements Converter<LeaguePhase, ro.szzsa.livescore.server.repository.model.LeaguePhase> {
 
   private final LeaguePhaseDao dao;
 
-  private final StandingsConverter standingsConverter;
+  private final StandingsCollectionConverter standingsCollectionConverter;
 
   @Autowired
   public LeaguePhaseConverter(LeaguePhaseDao dao,
                               StandingsConverter standingsConverter) {
     this.dao = dao;
-    this.standingsConverter = standingsConverter;
+    standingsCollectionConverter = new StandingsCollectionConverter(standingsConverter);
   }
 
   @Override
@@ -35,53 +29,33 @@ public class LeaguePhaseConverter
     if (entity == null) {
       return null;
     }
-    LeaguePhase leaguePhase = new LeaguePhase();
-    leaguePhase.setId(entity.getId());
-    leaguePhase.setTitle(entity.getTitle());
-    leaguePhase.setActive(entity.isActive());
-    leaguePhase.setPlayoff(entity.isPlayoff());
-    leaguePhase.setPlaces(entity.getPlaces());
-    leaguePhase.setSeriesLimit(entity.getSeriesLimit());
-    leaguePhase.setNumberOfTeams(entity.getNumberOfTeams());
-    leaguePhase.setStandingsList(convertEntitiesToStandings(entity.getStandingsSet()));
-    return leaguePhase;
+    LeaguePhase model = new LeaguePhase();
+    model.setId(entity.getId());
+    model.setTitle(entity.getTitle());
+    model.setActive(entity.isActive());
+    model.setPlayoff(entity.isPlayoff());
+    model.setPlaces(entity.getPlaces());
+    model.setSeriesLimit(entity.getSeriesLimit());
+    model.setNumberOfTeams(entity.getNumberOfTeams());
+    model.setStandingsList(standingsCollectionConverter.toModel(entity.getStandingsSet()));
+    return model;
   }
 
   @Override
-  public ro.szzsa.livescore.server.repository.model.LeaguePhase toEntity(LeaguePhase leaguePhase) {
+  public ro.szzsa.livescore.server.repository.model.LeaguePhase toEntity(LeaguePhase model) {
     ro.szzsa.livescore.server.repository.model.LeaguePhase entity =
         new ro.szzsa.livescore.server.repository.model.LeaguePhase();
-    entity.setId(leaguePhase.getId());
-    if (dao.exists(leaguePhase.getId())) {
-      entity = dao.findOne(leaguePhase.getId());
+    entity.setId(model.getId());
+    if (dao.exists(model.getId())) {
+      entity = dao.findOne(model.getId());
     }
-    entity.setTitle(leaguePhase.getTitle());
-    entity.setActive(leaguePhase.isActive());
-    entity.setPlayoff(leaguePhase.isPlayoff());
-    entity.setPlaces(leaguePhase.getPlaces());
-    entity.setSeriesLimit(leaguePhase.getSeriesLimit());
-    entity.setNumberOfTeams(leaguePhase.getNumberOfTeams());
-    entity.setStandingsSet(convertStandingsListToEntities(leaguePhase.getStandingsList()));
+    entity.setTitle(model.getTitle());
+    entity.setActive(model.isActive());
+    entity.setPlayoff(model.isPlayoff());
+    entity.setPlaces(model.getPlaces());
+    entity.setSeriesLimit(model.getSeriesLimit());
+    entity.setNumberOfTeams(model.getNumberOfTeams());
+    entity.setStandingsSet(standingsCollectionConverter.toEntity(model.getStandingsList()));
     return entity;
-  }
-
-  private List<Standings> convertEntitiesToStandings(
-      Set<ro.szzsa.livescore.server.repository.model.Standings> entities) {
-    if (entities == null) {
-      return null;
-    }
-    List<Standings> stats = new ArrayList<>(entities.size());
-    entities.forEach(teamStats -> stats.add(standingsConverter.toModel(teamStats)));
-    return stats;
-  }
-
-  private Set<ro.szzsa.livescore.server.repository.model.Standings> convertStandingsListToEntities(
-      List<Standings> stats) {
-    if (stats == null) {
-      return null;
-    }
-    Set<ro.szzsa.livescore.server.repository.model.Standings> entities = new HashSet<>(stats.size());
-    stats.forEach(teamStats -> entities.add(standingsConverter.toEntity(teamStats)));
-    return entities;
   }
 }

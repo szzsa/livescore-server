@@ -3,7 +3,7 @@ package ro.szzsa.livescore.server.service.converter;
 /**
  *
  */
-public interface DaoConverter<Model, Entity> {
+public interface Converter<Model, Entity> {
 
   Model toModel(Entity entity);
 

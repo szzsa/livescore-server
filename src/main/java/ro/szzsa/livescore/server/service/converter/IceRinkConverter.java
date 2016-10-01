@@ -10,7 +10,7 @@ import ro.szzsa.livescore.server.repository.dao.IceRinkDao;
  *
  */
 @Service
-public class IceRinkConverter implements DaoConverter<IceRink, ro.szzsa.livescore.server.repository.model.IceRink> {
+public class IceRinkConverter implements Converter<IceRink, ro.szzsa.livescore.server.repository.model.IceRink> {
 
   private final IceRinkDao dao;
 
@@ -24,30 +24,29 @@ public class IceRinkConverter implements DaoConverter<IceRink, ro.szzsa.livescor
     if (entity == null) {
       return null;
     }
-    IceRink iceRink = new IceRink();
-    iceRink.setId(entity.getId());
-    iceRink.setName(entity.getName());
-    iceRink.setCapacity(entity.getCapacity());
-    iceRink.setAddress(entity.getAddress());
-    iceRink.setLatitude(entity.getLatitude());
-    iceRink.setLongitude(entity.getLongitude());
-    return iceRink;
+    IceRink model = new IceRink();
+    model.setId(entity.getId());
+    model.setName(entity.getName());
+    model.setCapacity(entity.getCapacity());
+    model.setAddress(entity.getAddress());
+    model.setLatitude(entity.getLatitude());
+    model.setLongitude(entity.getLongitude());
+    return model;
   }
 
   @Override
-  public ro.szzsa.livescore.server.repository.model.IceRink toEntity(IceRink iceRink) {
-    ro.szzsa.livescore.server.repository.model.IceRink
-        entity =
+  public ro.szzsa.livescore.server.repository.model.IceRink toEntity(IceRink model) {
+    ro.szzsa.livescore.server.repository.model.IceRink entity =
         new ro.szzsa.livescore.server.repository.model.IceRink();
-    entity.setId(iceRink.getId());
-    if (dao.exists(iceRink.getId())) {
-      entity = dao.findOne(iceRink.getId());
+    entity.setId(model.getId());
+    if (dao.exists(model.getId())) {
+      entity = dao.findOne(model.getId());
     }
-    entity.setName(iceRink.getName());
-    entity.setCapacity(iceRink.getCapacity());
-    entity.setAddress(iceRink.getAddress());
-    entity.setLatitude(iceRink.getLatitude());
-    entity.setLongitude(iceRink.getLongitude());
+    entity.setName(model.getName());
+    entity.setCapacity(model.getCapacity());
+    entity.setAddress(model.getAddress());
+    entity.setLatitude(model.getLatitude());
+    entity.setLongitude(model.getLongitude());
     return entity;
   }
 }

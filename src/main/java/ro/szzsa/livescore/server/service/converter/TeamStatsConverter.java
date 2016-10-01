@@ -11,7 +11,7 @@ import ro.szzsa.livescore.server.repository.dao.TeamStatsDao;
  */
 @Service
 public class TeamStatsConverter
-    implements DaoConverter<TeamStats, ro.szzsa.livescore.server.repository.model.TeamStats> {
+    implements Converter<TeamStats, ro.szzsa.livescore.server.repository.model.TeamStats> {
 
   private final TeamStatsDao dao;
 
@@ -25,45 +25,45 @@ public class TeamStatsConverter
     if (entity == null) {
       return null;
     }
-    TeamStats stats = new TeamStats();
-    stats.setTeamId(entity.getTeamId());
-    stats.setGamesPlayed(entity.getGamesPlayed());
-    stats.setGoalsAgainst(entity.getGoalsAgainst());
-    stats.setGoalsFor(entity.getGoalsFor());
-    stats.setLosses(entity.getLosses());
-    stats.setOvertimeLosses(entity.getOvertimeLosses());
-    stats.setOvertimeWins(entity.getOvertimeWins());
-    stats.setPlace(entity.getPlace());
-    stats.setPoints(entity.getPoints());
-    stats.setStandingsId(entity.getStandingsId());
-    stats.setWins(entity.getWins());
-    return stats;
+    TeamStats model = new TeamStats();
+    model.setTeamId(entity.getTeamId());
+    model.setGamesPlayed(entity.getGamesPlayed());
+    model.setGoalsAgainst(entity.getGoalsAgainst());
+    model.setGoalsFor(entity.getGoalsFor());
+    model.setLosses(entity.getLosses());
+    model.setOvertimeLosses(entity.getOvertimeLosses());
+    model.setOvertimeWins(entity.getOvertimeWins());
+    model.setPlace(entity.getPlace());
+    model.setPoints(entity.getPoints());
+    model.setStandingsId(entity.getStandingsId());
+    model.setWins(entity.getWins());
+    return model;
   }
 
   @Override
-  public ro.szzsa.livescore.server.repository.model.TeamStats toEntity(TeamStats teamStats) {
+  public ro.szzsa.livescore.server.repository.model.TeamStats toEntity(TeamStats model) {
     ro.szzsa.livescore.server.repository.model.TeamStats entity =
         new ro.szzsa.livescore.server.repository.model.TeamStats();
-    long id = calculateId(teamStats);
+    long id = calculateId(model);
     entity.setId(id);
     if (dao.exists(id)) {
       entity = dao.findOne(id);
     }
-    entity.setTeamId(teamStats.getTeamId());
-    entity.setGamesPlayed(teamStats.getGamesPlayed());
-    entity.setGoalsAgainst(teamStats.getGoalsAgainst());
-    entity.setGoalsFor(teamStats.getGoalsFor());
-    entity.setLosses(teamStats.getLosses());
-    entity.setOvertimeLosses(teamStats.getOvertimeLosses());
-    entity.setOvertimeWins(teamStats.getOvertimeWins());
-    entity.setPlace(teamStats.getPlace());
-    entity.setPoints(teamStats.getPoints());
-    entity.setStandingsId(teamStats.getStandingsId());
-    entity.setWins(teamStats.getWins());
+    entity.setTeamId(model.getTeamId());
+    entity.setGamesPlayed(model.getGamesPlayed());
+    entity.setGoalsAgainst(model.getGoalsAgainst());
+    entity.setGoalsFor(model.getGoalsFor());
+    entity.setLosses(model.getLosses());
+    entity.setOvertimeLosses(model.getOvertimeLosses());
+    entity.setOvertimeWins(model.getOvertimeWins());
+    entity.setPlace(model.getPlace());
+    entity.setPoints(model.getPoints());
+    entity.setStandingsId(model.getStandingsId());
+    entity.setWins(model.getWins());
     return entity;
   }
 
-  private long calculateId(TeamStats teamStats) {
-    return Long.parseLong(String.valueOf(teamStats.getStandingsId()) + "00" + String.valueOf(teamStats.getTeamId()));
+  private long calculateId(TeamStats model) {
+    return Long.parseLong(String.valueOf(model.getStandingsId()) + "00" + String.valueOf(model.getTeamId()));
   }
 }

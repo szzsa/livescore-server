@@ -14,7 +14,7 @@ import ro.szzsa.livescore.server.repository.dao.GoalDao;
  *
  */
 @Service
-public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.server.repository.model.Goal> {
+public class GoalConverter implements Converter<Goal, ro.szzsa.livescore.server.repository.model.Goal> {
 
   private static final String SEPARATOR = ",";
 
@@ -30,40 +30,40 @@ public class GoalConverter implements DaoConverter<Goal, ro.szzsa.livescore.serv
     if (entity == null) {
       return null;
     }
-    Goal goal = new Goal();
-    goal.setType(GoalType.valueOf(entity.getType()));
-    goal.setGameId(entity.getGameId());
-    goal.setTeamId(entity.getTeamId());
-    goal.setOrder(entity.getOrderInGame());
-    goal.setTime(entity.getTime());
-    goal.setAuthor(entity.getAuthor());
+    Goal model = new Goal();
+    model.setType(GoalType.valueOf(entity.getType()));
+    model.setGameId(entity.getGameId());
+    model.setTeamId(entity.getTeamId());
+    model.setOrder(entity.getOrderInGame());
+    model.setTime(entity.getTime());
+    model.setAuthor(entity.getAuthor());
     if (entity.getAssists() != null) {
-      goal.setAssists(Arrays.asList(entity.getAssists().split(SEPARATOR)));
+      model.setAssists(Arrays.asList(entity.getAssists().split(SEPARATOR)));
     }
-    return goal;
+    return model;
   }
 
   @Override
-  public ro.szzsa.livescore.server.repository.model.Goal toEntity(Goal goal) {
+  public ro.szzsa.livescore.server.repository.model.Goal toEntity(Goal model) {
     ro.szzsa.livescore.server.repository.model.Goal entity = new ro.szzsa.livescore.server.repository.model.Goal();
-    long id = calculateId(goal);
+    long id = calculateId(model);
     entity.setId(id);
     if (dao.exists(id)) {
       entity = dao.findOne(id);
     }
-    entity.setType(goal.getType().name());
-    entity.setGameId(goal.getGameId());
-    entity.setTeamId(goal.getTeamId());
-    entity.setOrderInGame(goal.getOrder());
-    entity.setTime(goal.getTime());
-    entity.setAuthor(goal.getAuthor());
-    if (goal.getAssists() != null) {
-      entity.setAssists(StringUtils.join(goal.getAssists(), SEPARATOR));
+    entity.setType(model.getType().name());
+    entity.setGameId(model.getGameId());
+    entity.setTeamId(model.getTeamId());
+    entity.setOrderInGame(model.getOrder());
+    entity.setTime(model.getTime());
+    entity.setAuthor(model.getAuthor());
+    if (model.getAssists() != null) {
+      entity.setAssists(StringUtils.join(model.getAssists(), SEPARATOR));
     }
     return entity;
   }
 
-  private long calculateId(Goal goal) {
-    return Long.parseLong(String.valueOf(goal.getGameId()) + "00" + String.valueOf(goal.getOrder()));
+  private long calculateId(Goal model) {
+    return Long.parseLong(String.valueOf(model.getGameId()) + "00" + String.valueOf(model.getOrder()));
   }
 }

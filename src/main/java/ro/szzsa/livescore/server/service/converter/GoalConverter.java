@@ -31,6 +31,7 @@ public class GoalConverter implements Converter<Goal, ro.szzsa.livescore.server.
       return null;
     }
     Goal model = new Goal();
+    model.setId(entity.getId());
     model.setType(GoalType.valueOf(entity.getType()));
     model.setGameId(entity.getGameId());
     model.setTeamId(entity.getTeamId());

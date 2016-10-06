@@ -26,6 +26,7 @@ public class TeamStatsConverter
       return null;
     }
     TeamStats model = new TeamStats();
+    model.setId(entity.getId());
     model.setTeamId(entity.getTeamId());
     model.setGamesPlayed(entity.getGamesPlayed());
     model.setGoalsAgainst(entity.getGoalsAgainst());

@@ -26,6 +26,7 @@ public class PenaltyConverter implements Converter<Penalty, ro.szzsa.livescore.s
       return null;
     }
     Penalty model = new Penalty();
+    model.setId(entity.getId());
     model.setGameId(entity.getGameId());
     model.setTeamId(entity.getTeamId());
     model.setTime(entity.getTime());

@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ro.szzsa.livescore.server.controller.Constatnts;
+import ro.szzsa.livescore.server.controller.Constants;
 import ro.szzsa.livescore.server.controller.KeepAliveController;
 
 /**
  *
  */
 @Controller
-@RequestMapping(Constatnts.KEEP_ALIVE_URL)
+@RequestMapping(Constants.KEEP_ALIVE_URL)
 public class KeepAliveControllerImpl implements KeepAliveController {
 
   @GetMapping

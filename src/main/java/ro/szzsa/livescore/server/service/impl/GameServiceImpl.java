@@ -75,7 +75,7 @@ public class GameServiceImpl implements GameService {
     if (areGoalsChanged(oldGame, game) ||
         arePenaltiesChanged(oldGame, game) ||
         isTimeChanged(oldGame, game) ||
-        isStatusChanged(game)) {
+        isStatusChanged(oldGame, game)) {
       notificationService.sendNotification(game);
     }
   }
@@ -110,7 +110,7 @@ public class GameServiceImpl implements GameService {
     return !game.getTime().equals(oldGame.getTime());
   }
 
-  private boolean isStatusChanged(Game game) {
-    return !GameStatus.LIVE.equals(game.getStatus());
+  private boolean isStatusChanged(Game oldGame, Game game) {
+    return !oldGame.getStatus().equals(game.getStatus());
   }
 }

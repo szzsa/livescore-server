@@ -50,11 +50,11 @@ public class GameServiceImpl implements GameService {
       return;
     }
     Game oldGame = getGame(game.getId());
+    dao.save(converter.toEntity(game));
     if ((oldGame != null && GameStatus.LIVE.equals(oldGame.getStatus()))
         || GameStatus.LIVE.equals(game.getStatus())) {
       checkLiveGameEvents(oldGame, game);
     }
-    dao.save(converter.toEntity(game));
   }
 
   @Override

@@ -14,7 +14,7 @@ import ro.szzsa.livescore.server.service.VersionService;
 public class VersionServiceImpl implements VersionService {
 
   private static final long DEFAULT_APP_INFO_ID = 0L;
-  private static final int DEFAULT_APP_VERSION = 12;
+  private static final int DEFAULT_APP_VERSION = 13;
   private final ApplicationDao dao;
 
   @Autowired

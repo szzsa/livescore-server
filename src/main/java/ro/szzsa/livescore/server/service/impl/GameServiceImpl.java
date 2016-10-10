@@ -82,7 +82,7 @@ public class GameServiceImpl implements GameService {
 
   private boolean areGoalsChanged(Game oldGame, Game game) {
     if (oldGame == null) {
-      return true;
+      return game.getGoals() != null && game.getGoals().size() > 0;
     }
     if (oldGame.getGoals() == null) {
       return game.getGoals() != null && game.getGoals().size() > 0;
@@ -92,7 +92,7 @@ public class GameServiceImpl implements GameService {
 
   private boolean arePenaltiesChanged(Game oldGame, Game game) {
     if (oldGame == null) {
-      return true;
+      return game.getPenalties() != null && game.getPenalties().size() > 0;
     }
     if (oldGame.getPenalties() == null) {
       return game.getPenalties() != null && game.getPenalties().size() > 0;
@@ -102,7 +102,7 @@ public class GameServiceImpl implements GameService {
 
   private boolean isTimeChanged(Game oldGame, Game game) {
     if (oldGame == null) {
-      return true;
+      return game.getTime() != null && game.getTime().length() > 0;
     }
     if (oldGame.getTime() == null) {
       return game.getTime() != null && game.getTime().length() > 0;
@@ -111,6 +111,6 @@ public class GameServiceImpl implements GameService {
   }
 
   private boolean isStatusChanged(Game oldGame, Game game) {
-    return !oldGame.getStatus().equals(game.getStatus());
+    return oldGame == null || oldGame.getStatus() == null || !oldGame.getStatus().equals(game.getStatus());
   }
 }

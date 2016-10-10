@@ -24,12 +24,13 @@ public class VersionServiceImpl implements VersionService {
 
   @Override
   public int getVersion() {
-    if (dao.findOne(DEFAULT_APP_INFO_ID) == null) {
-      Application entity = new Application();
+    Application entity = dao.findOne(DEFAULT_APP_INFO_ID);
+    if (entity == null) {
+      entity = new Application();
       entity.setId(DEFAULT_APP_INFO_ID);
       entity.setVersion(DEFAULT_APP_VERSION);
       dao.save(entity);
     }
-    return dao.findOne(DEFAULT_APP_INFO_ID).getVersion();
+    return entity.getVersion();
   }
 }

@@ -44,18 +44,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
-        .authorizeRequests()
-        .antMatchers(Constants.KEEP_ALIVE_URL).permitAll()
-        .antMatchers(DeviceApiEndpoints.DEVICE_API_ROOT_PATH + SUB_PATHS).permitAll()
-        .antMatchers(ManagementApiEndpoints.MANAGEMENT_API_ROOT_PATH + SUB_PATHS).hasRole(MANAGEMENT_ROLE)
-        .antMatchers(AdministrationApiEndpoints.ADMINISTRATION_API_ROOT_PATH + SUB_PATHS).hasRole(ADMIN_ROLE)
-        .and().httpBasic()
-        .and().requiresChannel()
-        .antMatchers(Constants.KEEP_ALIVE_URL).requiresInsecure()
-        .antMatchers(DeviceApiEndpoints.DEVICE_API_ROOT_PATH + SUB_PATHS).requiresInsecure()
-        .antMatchers(ManagementApiEndpoints.MANAGEMENT_API_ROOT_PATH + SUB_PATHS).requiresSecure()
-        .antMatchers(AdministrationApiEndpoints.ADMINISTRATION_API_ROOT_PATH + SUB_PATHS).requiresSecure()
-        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+      .authorizeRequests()
+      .antMatchers(Constants.KEEP_ALIVE_URL).permitAll()
+      .antMatchers(Constants.LEGACY_SYNC_VERSION_URL).permitAll()
+      .antMatchers(DeviceApiEndpoints.DEVICE_API_ROOT_PATH + SUB_PATHS).permitAll()
+      .antMatchers(ManagementApiEndpoints.MANAGEMENT_API_ROOT_PATH + SUB_PATHS).hasRole(MANAGEMENT_ROLE)
+      .antMatchers(AdministrationApiEndpoints.ADMINISTRATION_API_ROOT_PATH + SUB_PATHS).hasRole(ADMIN_ROLE)
+      .and().httpBasic()
+      .and().requiresChannel()
+      .antMatchers(Constants.KEEP_ALIVE_URL).requiresInsecure()
+      .antMatchers(Constants.LEGACY_SYNC_VERSION_URL).requiresInsecure()
+      .antMatchers(DeviceApiEndpoints.DEVICE_API_ROOT_PATH + SUB_PATHS).requiresInsecure()
+      .antMatchers(ManagementApiEndpoints.MANAGEMENT_API_ROOT_PATH + SUB_PATHS).requiresSecure()
+      .antMatchers(AdministrationApiEndpoints.ADMINISTRATION_API_ROOT_PATH + SUB_PATHS).requiresSecure()
+      .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 
   @Bean

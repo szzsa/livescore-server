@@ -76,7 +76,7 @@ public class GameServiceImpl implements GameService {
         arePenaltiesChanged(oldGame, game) ||
         isTimeChanged(oldGame, game) ||
         isStatusChanged(oldGame, game)) {
-      notificationService.sendNotification(game);
+      notificationService.sendNotification(getGame(game.getId()));
     }
   }
 

@@ -26,6 +26,8 @@ public class Goal {
 
   private String time;
 
+  private boolean isEmptyNet;
+
   public long getId() {
     return id;
   }
@@ -88,5 +90,13 @@ public class Goal {
 
   public void setTime(String time) {
     this.time = time;
+  }
+
+  public boolean isEmptyNet() {
+    return isEmptyNet;
+  }
+
+  public void setEmptyNet(boolean emptyNet) {
+    isEmptyNet = emptyNet;
   }
 }

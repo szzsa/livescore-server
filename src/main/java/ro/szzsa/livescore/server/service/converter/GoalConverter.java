@@ -1,10 +1,10 @@
 package ro.szzsa.livescore.server.service.converter;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 
 import ro.szzsa.livescore.model.Goal;
 import ro.szzsa.livescore.model.GoalType;
@@ -37,6 +37,7 @@ public class GoalConverter implements Converter<Goal, ro.szzsa.livescore.server.
     model.setTeamId(entity.getTeamId());
     model.setOrder(entity.getOrderInGame());
     model.setTime(entity.getTime());
+    model.setEmptyNet(entity.isEmptyNet());
     model.setAuthor(entity.getAuthor());
     if (entity.getAssists() != null) {
       model.setAssists(Arrays.asList(entity.getAssists().split(SEPARATOR)));
@@ -57,6 +58,7 @@ public class GoalConverter implements Converter<Goal, ro.szzsa.livescore.server.
     entity.setTeamId(model.getTeamId());
     entity.setOrderInGame(model.getOrder());
     entity.setTime(model.getTime());
+    entity.setEmptyNet(model.isEmptyNet());
     entity.setAuthor(model.getAuthor());
     if (model.getAssists() != null) {
       entity.setAssists(StringUtils.join(model.getAssists(), SEPARATOR));

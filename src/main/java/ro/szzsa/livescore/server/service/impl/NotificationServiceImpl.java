@@ -15,7 +15,7 @@ import ro.szzsa.livescore.server.service.NotificationService;
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
-  private static final String API_KEY = "AIzaSyB3NhdQSWGcOHn0CSAfip4h11AcXjw95hM";
+  private static final String API_KEY = "";
 
   private final static Logger LOGGER = Logger.getLogger(NotificationServiceImpl.class);
 

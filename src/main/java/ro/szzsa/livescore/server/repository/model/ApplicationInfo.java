@@ -7,12 +7,14 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Application {
+public class ApplicationInfo {
 
   @Id
   private long id;
 
   private int version;
+
+  private String apiKey;
 
   public long getId() {
     return id;
@@ -28,5 +30,13 @@ public class Application {
 
   public void setVersion(int version) {
     this.version = version;
+  }
+
+  public String getApiKey() {
+    return apiKey;
+  }
+
+  public void setApiKey(String apiKey) {
+    this.apiKey = apiKey;
   }
 }

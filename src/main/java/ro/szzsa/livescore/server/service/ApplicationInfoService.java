@@ -3,7 +3,9 @@ package ro.szzsa.livescore.server.service;
 /**
  *
  */
-public interface VersionService {
+public interface ApplicationInfoService {
 
   int getVersion();
+
+  String getApiKey();
 }

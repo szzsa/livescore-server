@@ -1,10 +1,10 @@
 package ro.szzsa.livescore.server.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ro.szzsa.livescore.model.Game;
 import ro.szzsa.livescore.model.GameStatus;
@@ -52,7 +52,7 @@ public class GameServiceImpl implements GameService {
     Game oldGame = getGame(game.getId());
     dao.save(converter.toEntity(game));
     if ((oldGame != null && GameStatus.LIVE.equals(oldGame.getStatus()))
-        || GameStatus.LIVE.equals(game.getStatus())) {
+      || GameStatus.LIVE.equals(game.getStatus())) {
       checkLiveGameEvents(oldGame, game);
     }
   }
@@ -73,44 +73,50 @@ public class GameServiceImpl implements GameService {
 
   private void checkLiveGameEvents(Game oldGame, Game game) {
     if (areGoalsChanged(oldGame, game) ||
-        arePenaltiesChanged(oldGame, game) ||
-        isTimeChanged(oldGame, game) ||
-        isStatusChanged(oldGame, game)) {
+      arePenaltiesChanged(oldGame, game) ||
+      isTimeChanged(oldGame, game) ||
+      isStatusChanged(oldGame, game)) {
       notificationService.sendNotification(getGame(game.getId()));
     }
   }
 
   private boolean areGoalsChanged(Game oldGame, Game game) {
-    if (oldGame == null) {
-      return game.getGoals() != null && game.getGoals().size() > 0;
+    if (game == null || game.getGoals() == null) {
+      return false;
     }
-    if (oldGame.getGoals() == null) {
-      return game.getGoals() != null && game.getGoals().size() > 0;
+    if (oldGame == null || oldGame.getGoals() == null) {
+      return game.getGoals().size() > 0;
     }
     return game.getGoals().size() != oldGame.getGoals().size();
   }
 
   private boolean arePenaltiesChanged(Game oldGame, Game game) {
-    if (oldGame == null) {
-      return game.getPenalties() != null && game.getPenalties().size() > 0;
+    if (game == null || game.getPenalties() == null) {
+      return false;
     }
-    if (oldGame.getPenalties() == null) {
-      return game.getPenalties() != null && game.getPenalties().size() > 0;
+    if (oldGame == null || oldGame.getPenalties() == null) {
+      return game.getPenalties().size() > 0;
     }
     return game.getPenalties().size() != oldGame.getPenalties().size();
   }
 
   private boolean isTimeChanged(Game oldGame, Game game) {
-    if (oldGame == null) {
-      return game.getTime() != null && game.getTime().length() > 0;
+    if (game == null || game.getTime() == null) {
+      return false;
     }
-    if (oldGame.getTime() == null) {
-      return game.getTime() != null && game.getTime().length() > 0;
+    if (oldGame == null || oldGame.getTime() == null) {
+      return game.getTime().length() > 0;
     }
     return !game.getTime().equals(oldGame.getTime());
   }
 
   private boolean isStatusChanged(Game oldGame, Game game) {
-    return oldGame == null || oldGame.getStatus() == null || !oldGame.getStatus().equals(game.getStatus());
+    if (game == null || game.getStatus() == null) {
+      return false;
+    }
+    if (oldGame == null || oldGame.getStatus() == null) {
+      return true;
+    }
+    return !oldGame.getStatus().equals(game.getStatus());
   }
 }

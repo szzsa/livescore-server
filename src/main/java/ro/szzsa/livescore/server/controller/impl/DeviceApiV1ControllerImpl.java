@@ -14,7 +14,7 @@ import ro.szzsa.livescore.api.device.protocol.response.GameSyncResponse;
 import ro.szzsa.livescore.api.device.protocol.response.StatsSyncResponse;
 import ro.szzsa.livescore.api.device.protocol.response.VersionSyncResponse;
 import ro.szzsa.livescore.server.controller.DeviceApiV1Controller;
-import ro.szzsa.livescore.server.service.ApplicationInfoService;
+import ro.szzsa.livescore.server.service.ConfigService;
 import ro.szzsa.livescore.server.service.GameService;
 import ro.szzsa.livescore.server.service.LeaguePhasesService;
 import ro.szzsa.livescore.server.service.TeamService;
@@ -34,7 +34,7 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
 
   private final TeamService teamService;
 
-  private final ApplicationInfoService applicationInfoService;
+  private final ConfigService configService;
 
   private final Converter converter;
 
@@ -42,11 +42,11 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   public DeviceApiV1ControllerImpl(GameService gameService,
                                    LeaguePhasesService leaguePhasesService,
                                    TeamService teamService,
-                                   ApplicationInfoService applicationInfoService) {
+                                   ConfigService configService) {
     this.gameService = gameService;
     this.leaguePhasesService = leaguePhasesService;
     this.teamService = teamService;
-    this.applicationInfoService = applicationInfoService;
+    this.configService = configService;
     converter = Converters.createJsonConverter();
   }
 
@@ -79,7 +79,7 @@ public class DeviceApiV1ControllerImpl implements DeviceApiV1Controller {
   public String syncVersion(@RequestBody String versionSyncRequest) {
     VersionSyncRequest request = converter.fromString(versionSyncRequest, VersionSyncRequest.class);
     VersionSyncResponse response = new VersionSyncResponse();
-    response.setUpdateApp(request.getAppVersion() < applicationInfoService.getVersion());
+    response.setUpdateApp(request.getAppVersion() < configService.getAndroidAppVersion());
     return converter.toString(response);
   }
 }

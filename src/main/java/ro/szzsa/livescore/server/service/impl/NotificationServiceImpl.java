@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import ro.szzsa.livescore.api.device.server.NotificationException;
 import ro.szzsa.livescore.api.device.server.NotificationSender;
 import ro.szzsa.livescore.model.Game;
-import ro.szzsa.livescore.server.service.ApplicationInfoService;
+import ro.szzsa.livescore.server.service.ConfigService;
 import ro.szzsa.livescore.server.service.NotificationService;
 
 /**
@@ -19,18 +19,18 @@ public class NotificationServiceImpl implements NotificationService {
 
   private final static Logger LOGGER = Logger.getLogger(NotificationServiceImpl.class);
 
-  private final ApplicationInfoService applicationInfoService;
+  private final ConfigService configService;
 
   @Autowired
-  public NotificationServiceImpl(ApplicationInfoService applicationInfoService) {
-    this.applicationInfoService = applicationInfoService;
+  public NotificationServiceImpl(ConfigService configService) {
+    this.configService = configService;
   }
 
   @Async
   @Override
   public void sendNotification(Game game) {
     try {
-      new NotificationSender().sendGameUpdate(applicationInfoService.getApiKey(), game);
+      new NotificationSender().sendGameUpdate(configService.getFCMApiKey(), game);
     } catch (NotificationException e) {
       LOGGER.error("Cannot send notification", e);
     }
